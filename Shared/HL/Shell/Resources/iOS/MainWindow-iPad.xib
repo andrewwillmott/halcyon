@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+    <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIApplication">
+            <connections>
+                <outlet property="delegate" destination="3" id="4"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <customObject id="3" userLabel="App Delegate" customClass="AppDelegate">
+            <connections>
+                <outlet property="feedbackViewController" destination="zZN-sv-Uf4" id="dNP-IU-fiK"/>
+                <outlet property="glView" destination="17" id="18"/>
+                <outlet property="mainViewController" destination="dnu-rk-Meh" id="nNe-dY-aSS"/>
+                <outlet property="webViewController" destination="BfZ-un-4e3" id="Wtj-H5-3Sk"/>
+                <outlet property="window" destination="12" id="14"/>
+            </connections>
+        </customObject>
+        <window opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="12">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+        </window>
+        <viewController modalTransitionStyle="flipHorizontal" id="dnu-rk-Meh" userLabel="Root View Controller" customClass="RootViewController">
+            <view key="view" autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" id="17" userLabel="GLES View" customClass="EAGLView">
+                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            </view>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <nil key="simulatedDestinationMetrics"/>
+        </viewController>
+        <viewController modalTransitionStyle="flipHorizontal" modalPresentationStyle="pageSheet" id="zZN-sv-Uf4" userLabel="Feedback View Controller" customClass="FeedbackViewController">
+            <view key="view" contentMode="scaleToFill" id="XmQ-te-YuV">
+                <rect key="frame" x="0.0" y="0.0" width="768" height="768"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="zAq-PL-GJn">
+                        <rect key="frame" x="20" y="116" width="728" height="632"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.91344684103260865" green="0.91344684103260865" blue="0.91344684103260865" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                    </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3DF-34-wUx">
+                        <rect key="frame" x="688" y="7" width="60" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Submit">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="saveAction:" destination="zZN-sv-Uf4" eventType="touchUpInside" id="6NQ-tP-ZlU"/>
+                        </connections>
+                    </button>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" id="LY9-Xp-qmD">
+                        <rect key="frame" x="266" y="48" width="236" height="29"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <segments>
+                            <segment title="1"/>
+                            <segment title="2"/>
+                            <segment title="3"/>
+                            <segment title="4"/>
+                            <segment title="5"/>
+                        </segments>
+                        <connections>
+                            <action selector="setRating:" destination="zZN-sv-Uf4" eventType="valueChanged" id="KJ0-z7-sAy"/>
+                        </connections>
+                    </segmentedControl>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GtY-Bk-jXg">
+                        <rect key="frame" x="192" y="50" width="55" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GnT-SF-pHU">
+                        <rect key="frame" x="520" y="50" width="125" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Xf-g7-c8u">
+                        <rect key="frame" x="26" y="92" width="89" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4Y6-3k-vTK">
+                        <rect key="frame" x="20" y="7" width="48" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Cancel">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="cancelAction:" destination="zZN-sv-Uf4" eventType="touchUpInside" id="Lky-po-4KH"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            </view>
+            <extendedEdge key="edgesForExtendedLayout"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <nil key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="ratingControl" destination="LY9-Xp-qmD" id="Y2r-jJ-GCX"/>
+                <outlet property="ratingLabel" destination="GnT-SF-pHU" id="Jd1-68-tLC"/>
+                <outlet property="textView" destination="zAq-PL-GJn" id="DnG-95-n9e"/>
+            </connections>
+        </viewController>
+        <viewController modalTransitionStyle="flipHorizontal" modalPresentationStyle="pageSheet" id="BfZ-un-4e3" userLabel="Web View Controller" customClass="WebViewController">
+            <view key="view" contentMode="scaleToFill" id="Vuk-Ys-NI9">
+                <rect key="frame" x="0.0" y="0.0" width="768" height="768"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <webView contentMode="scaleToFill" id="Fbk-Vi-rad">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="724"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <connections>
+                            <outlet property="delegate" destination="BfZ-un-4e3" id="cmd-ub-bBb"/>
+                        </connections>
+                    </webView>
+                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="koO-CP-847">
+                        <rect key="frame" x="0.0" y="724" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <items>
+                            <barButtonItem image="back_icon.png" id="V7x-uw-haG" userLabel="Back">
+                                <connections>
+                                    <action selector="handleBack:" destination="BfZ-un-4e3" id="yL6-Ln-9WL"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="gOq-ny-AdK"/>
+                            <barButtonItem image="forward_icon.png" id="iTr-0T-JJF" userLabel="Forward">
+                                <connections>
+                                    <action selector="handleForward:" destination="BfZ-un-4e3" id="ZuS-eH-LKm"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="dYj-7i-354"/>
+                            <barButtonItem systemItem="refresh" id="nJH-GC-Ohh" userLabel="Refresh"/>
+                            <barButtonItem style="plain" systemItem="flexibleSpace" id="sbz-nL-0zC"/>
+                            <barButtonItem systemItem="done" id="Jph-Od-8pE" userLabel="Done">
+                                <connections>
+                                    <action selector="handleDone:" destination="BfZ-un-4e3" id="XBB-hs-xnn"/>
+                                </connections>
+                            </barButtonItem>
+                        </items>
+                    </toolbar>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            </view>
+            <extendedEdge key="edgesForExtendedLayout"/>
+            <toolbarItems/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <nil key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="backButton" destination="V7x-uw-haG" id="tmc-K0-FiD"/>
+                <outlet property="forwardButton" destination="iTr-0T-JJF" id="ZRQ-KJ-Lvm"/>
+                <outlet property="webView" destination="Fbk-Vi-rad" id="BD2-e2-2mO"/>
+            </connections>
+        </viewController>
+    </objects>
+    <resources>
+        <image name="back_icon.png" width="21" height="18"/>
+        <image name="forward_icon.png" width="21" height="18"/>
+    </resources>
+</document>

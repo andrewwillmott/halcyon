@@ -1,0 +1,37 @@
+////////////////////////////////////////////////////////////////////////////////
+//  CL.xcconfig
+//
+
+CLIENT_ROOT = $(SRCROOT)/../..
+
+// Turn off Xcode's auto-magic header matching, more trouble than it's worth
+USE_HEADERMAP = NO
+
+// In-tree output directory rather than Apple's hidden build products folder.
+SYMROOT = $(CLIENT_ROOT)/Build
+
+// Some useful defaults
+PRODUCT_NAME = $(TARGET_NAME)
+INFOPLIST_FILE = $(TARGET_NAME).plist
+
+// Halcyon build setup
+CONFIG_ROOT = $(CLIENT_ROOT)/Config
+SHARED_ROOT = $(CLIENT_ROOT)/Shared
+EXTERNAL_ROOT = $(CLIENT_ROOT)/External
+
+CL_ROOT = $(SHARED_ROOT)/CL
+VL_ROOT = $(SHARED_ROOT)/VL
+GCL_ROOT = $(SHARED_ROOT)/GCL
+STL_ROOT = $(SHARED_ROOT)/ustl
+
+CL_HEADERS = $(CLIENT_ROOT)/Config $(STL_ROOT)/include $(CL_ROOT)/h $(VL_ROOT)/h $(GCL_ROOT)/h
+CL_BUILD_SYMBOLS =
+
+HEADER_SEARCH_PATHS = $(inherited) $(CL_HEADERS)
+GCC_PREPROCESSOR_DEFINITIONS = $(PLATFORM_BUILD_SYMBOLS) $(CONFIG_BUILD_SYMBOLS) $(CL_BUILD_SYMBOLS) $(inherited)
+
+CL_LINK_FLAGS_IOS = -framework CFNetwork -framework SystemConfiguration
+CL_LINK_FLAGS_OSX = -framework SystemConfiguration -F/System/Library/PrivateFrameworks -framework MultitouchSupport
+
+// Avoiding this for now.
+//GCC_PREFIX_HEADER = $(CONFIG_ROOT)/GlobalConfig.h

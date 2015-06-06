@@ -1,0 +1,191 @@
+// Shared material definitions
+{
+    // Prefixed to all shaders...
+    shaderPrefix: "prefix.sh",
+
+    // Standard shaders -- will become include of Shared/Materials
+    invalid:
+    {
+        fragmentShader: "colourUV",
+        vertexShader: "colourUV3D"
+    },
+
+    model:
+    {
+        fragmentShader: "diffuseNMap",
+        vertexShader: "UV3D",
+
+        cullMode: back,
+        depthTest: true,
+        depthWrite: true
+    },
+
+    modelUntextured:
+    {
+        fragmentShader: "colour",
+        vertexShader: "colour3D",
+
+        cullMode: back,
+        depthTest: true,
+        depthWrite: true
+    },
+
+    modelSolid:
+    {
+        fragmentShader: "colour",
+        vertexShader: "solid3D",
+
+        cullMode: back,
+        depthTest: true,
+        depthWrite: true
+    },
+
+    quad:
+    {
+        fragmentShader: "colourUV",
+        vertexShader: "colourUV3D",
+
+        cullMode: none,
+        blend: [add, sourceAlpha, invSourceAlpha],
+        depthCompare: always,
+        depthWrite: false
+    },
+
+    // Standard textured particle
+    particles:
+    {
+        fragmentShader: "colourUV",
+        vertexShader: "colourUV3D",
+
+        cullMode: none,
+        blend: [add, sourceAlpha, invSourceAlpha],
+        depthCompare: always,
+        depthWrite: false
+    },
+
+    particlesAdditive:
+    {
+        fragmentShader: "colourUV",
+        vertexShader: "colourUV3D",
+
+        cullMode: none,
+        blend: [add, sourceAlpha, one],
+        depthCompare: always,
+        depthWrite: false
+    },
+
+    // Alpha-from-texture particle
+    particlesAlpha:
+    {
+        fragmentShader: "colourUVAlpha",
+        vertexShader: "colourUV3D",
+
+        cullMode: none,
+        blend: [add, sourceAlpha, invSourceAlpha],
+        depthCompare: always,
+        depthWrite: false
+    },
+
+    particlesGrey:
+    {
+        fragmentShader: "greyUV",
+        vertexShader: "colourUV3D",
+
+        cullMode: none,
+        blend: [add, sourceAlpha, invSourceAlpha],
+        depthCompare: always,
+        depthWrite: false
+    },
+
+    // Screen effects
+
+    screenAdditive:
+    {
+        fragmentShader: "colour",
+        vertexShader: "colour2D",
+
+        cullMode: none,
+        depthWrite: false,
+        blend: [add, sourceAlpha, one]
+    },
+
+    screenBlend:
+    {
+        fragmentShader: "colour",
+        vertexShader: "colour2D",
+
+        cullMode: none,
+        depthWrite: false,
+        blend: [add, sourceAlpha, invSourceAlpha]
+    },
+
+    screenAdditiveTextured:
+    {
+        fragmentShader: "colourUV",
+        vertexShader: "colourUV2D",
+
+        cullMode: none,
+        depthWrite: false,
+        blend: [add, sourceAlpha, one]
+    },
+
+    screenBlendTextured:
+    {
+        fragmentShader: "colourUV",
+        vertexShader: "colourUV2D",
+
+        cullMode: none,
+        depthWrite: false,
+        blend: [add, sourceAlpha, invSourceAlpha]
+    },
+
+    // Misc
+    texture2D:
+    {
+        fragmentShader: "colourUV",
+        vertexShader: "colourUV2D",
+
+        cullMode: none,
+        depthWrite: false,
+        blend: [add, sourceAlpha, invSourceAlpha]
+    },
+
+    textureNoAlpha2D:
+    {
+        fragmentShader: "colourUV",
+        vertexShader: "colourUV2D",
+
+        cullMode: none,
+        depthWrite: false,
+        blend: [none]
+    },
+
+    // Debug drawing
+    debugDraw2D:
+    {
+        fragmentShader: "colour",
+        vertexShader: "colour2D",
+
+        cullMode: none,
+        depthWrite: false,
+        blend: [add, sourceAlpha, invSourceAlpha]
+    },
+    debugDrawText2D:
+    {
+        fragmentShader: "debugDrawText2D",
+        vertexShader: "colourUV2D",
+
+        cullMode: none,
+        depthWrite: false,
+        blend: [add, sourceAlpha, invSourceAlpha]
+    },
+    debugDraw:
+    {
+        fragmentShader: "colour",
+        vertexShader: "colour3D",
+
+        cullMode: none,
+        depthWrite: false,
+        blend: [add, sourceAlpha, invSourceAlpha]
+    },
+}

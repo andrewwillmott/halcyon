@@ -1,0 +1,127 @@
+vec BUGS OUTSTANDING
+	
+TO DO
+
+    Sparse stuff
+    - sparse versions of SVD
+    - proper sparse subvectors. A sparse subvector is:
+      - no sentinel at the end
+      - a pair list, first index, count, range of pair list
+      - or: pairs_begin, pairs_end, first, count
+        which means changing the underlying vector invalidates
+        references.
+      - okay because ditto with vec refs?
+
+      AddSparse(a_begin, a_end, b_begin, b_end, first, count);
+      
+
+
+	Get rid of new == 0 memory checks =(
+
+	make policy decision on whether assignments to gen vecs and mats
+	should resize them or require that they already be the right size.
+		with new ref model: refs shouldn't resize, vecs either should,
+		or should if they're zero-size.
+
+	vl ref changes
+		VecRef/ConstVecRef: no delete, but does all ops
+			copy operator only copies if size okay
+		Vec:
+			delete on destruct
+			copy operator does resize?
+
+	problem: 
+		Vec can be a reference
+		Mat[i] returns Vec, always
+		with +=, result from m[i] is a temporary
+		C++ insists it's treated as a const: can't pass to (A &a)
+		so
+			how do we indicate notions of const/not?
+			
+			
+	a = b + c + d;
+	if a + b returns 
+	use standard stack trick of a + b returns VecTemp,
+	which is a temporary: define a + b where a is a VecTemp,
+	doesn't create new variable.
+	
+	add MakeBlock etc. documentation?
+
+	*** change cross(Vec2) to right-handed.
+
+	add Mat/Vec == ZeroOrOne operators
+	add in a note about templating to readme
+	Factor
+		sparse versions for factoring stuff
+		add to headers
+		norm(Matrix) = largest singular value...
+	add SubVec -=/+=/etc.?
+	shift clamp* -> Sub stuff? NO
+	add sqrlen for matrices
+	add x = vl_negate or x.Negate()? might be worthwhile to
+		save copy overhead on x = -x.
+
+DONE
+
+1.4
+    Replaced old Array classes with STL.
+
+1.3
+	Fixed problems with stack temporaries being passed as non-const
+		references by making *= etc. in-class for Vec[fd].  This is a
+		temporary workaround. It breaks some sub vector stuff, such as
+		sub(v, 2, 4) *= 3.0; The latest version of gcc shipped with
+		redhat 7 no longer takes the -fpermissive flag, however, so it's
+		necessary. A redesign to get around stack temporaries no longer
+		playing well with constness (and thus necessitating separate
+		const and non-const helper classes, and making it harder than
+		ever to get C++'s one-conversion-only type system to do what it
+		needs to do) is in the works -- it will be VL version 2.0.
+	added SubVec -=/+=/etc.
+	eliminated v *= m;
+	removed all asserts checking that the return value of 'new' is
+		not zero. The C++ 'standard' has been changed so that new
+		instead throws an exception in this situation.
+	added option to use memcpy for general vector copies: VL_USE_MEMCPY.
+		The situation seems to have changed so that, on Intel processors
+		at least, using memcpy is faster than loops for most cases. See
+		note in Vec.cc. (ADVANCED: If you want a container type that
+		needs to have its constructor called, this should be disabled.)
+
+1.2
+	solve/factor stuff nuked from VLf stuff 
+		who would ever want heavy duty numerical routines in float?
+	changed headers to assume vl/VLd.h, vl/Vec2.h etc
+	set VLConfig.h on install, so programs linking against it get right
+		flags and don't have to do -D__GCC__ etc. (duh.)
+	added Normalise() method to vectors... normalise() is now deprecated.
+		(The lower-case vector ops should only be math functions.)
+	added zero-length assert to norm and Normalise
+
+1.1.4
+	minor VLMath.h fixes
+	fixed buggy sparse matrix trans()
+	added ConvertVec and ConvertMat for converting between float/double.
+		(VLMath.h)
+	changed headers to have vl/ prefix (unix version only)
+	renamed vl_finite to vl_is_finite
+	added vl_inf to VLMath.h
+	added vl_rand to VLMath.h
+	added clamp[ed] for VecN
+	added sign()
+	added Factor.cc SVD/QR factorization routines
+	updated docs to reflect this
+	added xform for 2d & 3d, and mixed versions
+
+1.1.3
+	MakeUnit etc. now return SELF, so can now do:
+		a += Vec3d().MakeBlock(2.2);
+	Added CL_NO_MEM_MAP so we can compile with PCs
+	Added dist/vl-win for windows distribution.
+	Added mixed version of xform. (Do we need this for
+	Mat3 as well?)
+	Added linear solver documentation.
+	Other minor docs cleanups.
+	Consolidated docs into one file vl.html.
+	Created VC++ distribution for vl in vl.zip
+

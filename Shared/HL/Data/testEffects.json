@@ -1,0 +1,326 @@
+// Effects
+{
+
+particles:
+{
+    // Particle test effects
+    test:
+    {
+        // Creation
+
+        emitSource:
+        {
+            type: point,          // point, square, rect, cube, box, circle, sphere, ellipse, ellipsoid, ring, torus
+            // size: 1,         // for anything except point
+            // width: 0.1,         // for ring/torus
+            offset: [0, 0, 0],
+            emitScaleArea: true,
+            sizeScale: true
+        },
+
+        emitDir: [0, 0, 1],
+        emitSpread: [0.1, 0.3, 0],
+        emitSpeed: [4, 4],
+
+        life: [5],
+        rate: 100,
+        cycleTime: 4,
+        cycleCount: 0,
+
+        colourVary: [0.2, 0.2, 0.2],
+        rotateVary: 0.5,
+        scaleVary: 0.1,
+
+        // Physics
+        gravity: 2,
+        drag: 0.01,
+
+        // Animation
+        colour: [ [1, 0, 0], [0, 0, 1] ],
+        alpha: [ 1, 1, 1, 1, 0 ],
+        size: [0.1, 0.2, 0.1],
+
+        stretch: 0.5,
+
+        texture: effect
+    },
+
+    injectTest:
+    {
+        emitSource: { type: sphere, size: 0.3 },
+        emitSpeed: 4,
+
+        inject: 1,
+        cycleTime: 1.0,
+        cycleCount: 1,
+
+        inject: [20, 10, 1],
+        cycleTime: 2,
+        cycleCount: 3,
+
+        life: 0.5,
+        lifeLoop: true,
+
+        // Physics
+        gravity: 2,
+        drag: 0.01,
+
+        // Animation
+        colour: [ [1, 1, 1], [0, 0.5, 1] ],
+        alpha: [ 1, 1, 1, 1, 0 ],
+        size: [0.2],
+
+        stretch: 0.5,
+
+        texture: particleGrid,
+
+        controller: bounce
+    },
+
+    maintainTest:
+    {
+        emitSource: { type: point },
+        emitSpeed: 4,
+        emitDir: [0, 0, 1],
+        emitSpread: 0.4,
+
+        maintain: 4,
+        cycleTime: 0.1,     // Cycle time in this case controls how often we update particles
+
+        life: 0.5,
+        // lifeLoop: true,
+
+        gravity: 2,
+
+        // Animation
+        colour: [ [1, 0, 0] ],
+        size: 0.3,
+
+        texture: particleGrid,
+    },
+
+    emitTest:
+    {
+        emitSource: { type: point },
+        emitSpeed: 4,
+        emitDir: [-1, 0, 0],
+
+        life: 10,
+        rate: 8,
+        cycleTime: 4,
+        cycleCount: 0,
+
+        // Physics
+
+        // Animation
+        colour: [ [1, 1, 1], [0, 0, 1] ],
+        size: 0.1,
+
+        texture: particleGrid
+    },
+
+    rotateTest:
+    {
+        // Creation
+
+        emitSource: { type: point },
+
+        emitDir: [0, 0, 1],
+        emitSpeed: 2,
+
+        colourVary: [1, 0, -1],
+        colour: [0.5, 0.5, 0.5],
+//                colourVaryRGB: 1,
+
+        life: 8,
+        rate: 1,
+
+        rotate: [0, 10],
+        rotateVary: 0.5,
+        rotateOffset: 0.25,
+
+        aspect: [0.5, 1],
+        aspectVary: 0.4,
+
+
+        // Animation
+        size: 0.5,
+
+        texture: particleGrid
+    },
+
+    tilesTest:
+    {
+        // Creation
+
+        emitSource:
+        {
+            type: point,
+        },
+
+        emitDir: [0, 0, 1],
+        emitSpeed: 1,
+
+        animFrames:
+        {
+            start: 0,
+            count: 4,
+            random: 4
+        },
+
+        life: 10,
+        rate: [1],
+        cycleTime: 4,
+        cycleCount: 0,
+
+        // Animation
+        size: 0.3,
+
+        tilesU: 4,
+        tilesV: 4,
+        tilesSpeed: 40,
+
+        material: particlesParamTest,
+        texture: particleTiles
+    },
+
+    radialTest:
+    {
+        rate: 100,
+        emitSource: { type: ring, size: 4, width: 0.5 },
+        emitRadial: true,
+        emitSpeed: 1,
+
+        life: 5,
+        size: 0.1,
+        colour: [1, 0.5, 0],
+        texture: effect
+    }
+},
+
+sprites:
+{
+    spriteTest:
+    {
+        emitDir: [0, 0, 1],
+        emitSpread: 0.1,
+
+        align: cameraPos,
+
+        life: 5,
+
+        // Animation
+        colour: [ [1, 1, 0], [0, 1, 1], [1, 1, 0] ],
+        alpha: [ 1, 1, 1, 1, 0 ],
+        size: [0.5, 1.0, 0.5],
+        rotate: [0, 0.25, 0, -0.25, 0],
+
+        texture: particleTiles,
+
+        controller: bounce,
+
+        animFrames:
+        {
+            start: 0,
+            count: 4,
+            random: 4
+        },
+
+        tilesU: 4,
+        tilesV: 4,
+        tilesSpeed: 40,
+    },
+
+    spriteLayerATest:
+    {
+        colour: [1, 0, 0],
+        rotate: 0.0,
+        texture: particleGrid,
+
+        depthLayer: 0,  // the default
+    },
+    spriteLayerBTest:
+    {
+        colour: [0, 1, 0],
+        rotate: 0.1,
+        texture: particleGrid,
+
+        layer: 1
+    },
+    spriteLayerCTest:
+    {
+        colour: [0, 0, 1],
+        rotate: 0.2,
+        texture: particleGrid,
+    },
+},
+
+ribbons:
+{
+    ribbonTest:
+    {
+        length: 3.0,    // Rest length of fully extended ribbon.
+                        // It's possible for the ribbon to be longer than this if the anchor is moving very quickly
+
+        segments: 16,   // Maximum number of segments in the ribbon. Controls smoothness at the expense of triangle count.
+
+        uvSpeed: 0.0,   // speed with which to slide texture along the ribbon
+        uvRepeat: 1.0,  // how many times to repeat texture along the ribbon
+
+        fadeRate: 0.0,  // how quickly the ribbon fades over time.
+
+        colour: [[1, 1, 1], [0, 0, 1]],
+        alpha:  [0, 1, 1, 1, 1, 0.75, 0.5, 0.25, 0],
+        size:   [0.2, 0.2, 0.5, 1],
+
+        force: [0, -9, 0],
+
+        material: particles,
+        texture: particleGrid,
+
+        // also texture1/texture2 and/or material1/material2
+    }
+},
+
+shakes:
+{
+    shakeTest:
+    {
+        type: random,
+        life: 4,
+        amplitude: [ 2, 10, 20, 10, 2 ],
+        frequency: [ 1, 2, 4, 2, 1 ],
+    },
+},
+
+screens:
+{
+    screenTest:
+    {
+        mode: add,      // add, blend, tint, background, skybox
+        life: 1,
+        colour: [[1, 0, 0], [1, 1, 0], [0, 1, 1]],
+        alpha: [0, 1, 0, 1, 0, 1, 0.2, 0.1, 0]
+    },
+
+    screenTextureTest:
+    {
+        life: 1,
+        colour: 1,
+        alpha: [0, 1, 1, 1, 0],
+        texture: effect
+    }
+},
+
+groups:
+{
+    spriteLayerTest: { effects:
+    [
+        { id: sprite.spriteLayerATest, transform: { translation: [-1, 0, 0] } },
+        { id: sprite.spriteLayerBTest, transform: { translation: [ 0, 0, 0] } },
+        { id: sprite.spriteLayerCTest, transform: { translation: [ 1, 0, 0] } },
+    ]}
+
+}
+
+}

@@ -1,0 +1,221 @@
+
+Environ Test
+------------
+
+shell = /bin/sh, path = /home/ajw/bob
+
+List Test
+---------
+
+()
+(red orange green)
+
+String Test
+-----------
+
+sprintf test: number 20, strings 'cstring' 'strconst' 'string'
+StrConst + CStr: strconstcstr
+String + CStr: stringcstr
+CStr + String: cstrstring
+String + StrConst + CStr: stringstrconstcstr
+print(StrConst): string
+print(StrConst): blah-string-blah
+iso for string/strconst == good
+string/cstr == good
+strconst/cstr == good
+string/strconst == good
+Suffix/Prefix test: gh:cdefgh:ab:abcdef<
+Suffix/Prefix bounds test: abcdefgh::abcdefgh:<
+SubString test: cdef:cdef<
+SubString bounds test: :abcd:cdefgh<
+Find char test: 2, -1, 0, 6
+Find tokens test: 
+string = 	 there is a disease   that is tearing apart the  lives of thousands
+token 0 = 'there'
+token 1 = 'is'
+token 2 = 'a'
+token 3 = 'disease'
+token 4 = 'that'
+token 5 = 'is'
+token 6 = 'tearing'
+token 7 = 'apart'
+token 8 = 'the'
+token 9 = 'lives'
+token 10 = 'of'
+token 11 = 'thousands'
+
+InstArray Test
+--------------
+
+reads             20
+writes            140
+total accesses    160
+0 = 6
+1 = 6
+2 = 11
+3 = 8
+4 = 9
+5 = 7
+6 = 11
+7 = 10
+8 = 7
+9 = 9
+10 = 8
+11 = 7
+12 = 7
+13 = 9
+14 = 7
+15 = 8
+16 = 10
+17 = 6
+18 = 6
+19 = 8
+
+Hash Test
+---------
+
+jane -> 10
+bob -> 20
+mary -> 34
+peter -> 21
+bob exists: 1
+robert exists: 0
+
+FileName Test
+-------------
+
+the path is /one/two/three/and/wibble.sl.gz
+parent: /one/two/three/and
+name: wibble.sl
+extensions: gz
+removed extension
+new name: wibble
+new ext: sl
+exists: /one/two/three/and/wibble.sl: 0
+exists: ./Makefile: 1
+exists: ./Makefile.depend: 1
+a: file ./a.a 4 [0]
+a.b.gz: file ./a.b 1 [1]
+a.e: file ./a.e 0 [-2]
+b: file ./b 0 [-1]
+updating 95
+updating 70
+updating 34
+updating 78
+updating 67
+updating 1
+updating 97
+updating 2
+updating 17
+updating 92
+updating 52
+updating 56
+updating 1
+updating 80
+updating 86
+updating 41
+updating 65
+updating 89
+updating 44
+updating 19
+removing 40
+removing 24
+removing 59
+removing 15
+removing 81
+removing 21
+removing 3
+removing 77
+removing 5
+removing 19
+removing 57
+removing 51
+removing 33
+removing 48
+removing 76
+removing 5
+removing 22
+removing 81
+removing 67
+removing 65
+80 items in heap:
+0 > 0.998592
+1 > 0.993837
+2 > 0.942959
+3 > 0.936839
+4 > 0.93142
+5 > 0.925647
+6 > 0.894945
+7 > 0.892101
+8 > 0.865283
+9 > 0.849194
+10 > 0.846446
+11 > 0.831946
+12 > 0.823768
+13 > 0.809732
+14 > 0.77685
+15 > 0.767904
+16 > 0.746066
+17 > 0.733212
+18 > 0.726086
+19 > 0.721468
+20 > 0.717854
+21 > 0.677205
+22 > 0.63732
+23 > 0.632817
+24 > 0.62326
+25 > 0.615529
+26 > 0.591781
+27 > 0.586874
+28 > 0.586148
+29 > 0.584268
+30 > 0.584084
+31 > 0.574568
+32 > 0.556151
+33 > 0.54931
+34 > 0.537209
+35 > 0.534801
+36 > 0.525493
+37 > 0.49084
+38 > 0.458552
+39 > 0.455757
+40 > 0.452802
+41 > 0.450258
+42 > 0.419172
+43 > 0.410358
+44 > 0.391787
+45 > 0.365778
+46 > 0.35523
+47 > 0.342884
+48 > 0.342083
+49 > 0.339111
+50 > 0.335368
+51 > 0.33495
+52 > 0.322844
+53 > 0.294793
+54 > 0.289524
+55 > 0.2887
+56 > 0.284545
+57 > 0.270128
+58 > 0.266003
+59 > 0.235332
+60 > 0.232379
+61 > 0.228217
+62 > 0.18139
+63 > 0.180881
+64 > 0.170967
+65 > 0.168666
+66 > 0.165035
+67 > 0.161398
+68 > 0.14798
+69 > 0.128866
+70 > 0.118568
+71 > 0.118068
+72 > 0.109927
+73 > 0.105152
+74 > 0.100429
+75 > 0.0884442
+76 > 0.0651783
+77 > 0.0573965
+78 > 0.00971934
+79 > 0.00136567

@@ -1,0 +1,48 @@
+////////////////////////////////////////////////////////////////////////////////
+//  HL.xcconfig
+//
+
+#include "../CL.xcconfig"
+
+HL_ROOT = $(SHARED_ROOT)/HL
+HL_HEADERS = $(HL_ROOT)/h
+
+HTTP_HEADERS = $(EXTERNAL_ROOT)/CocoaHTTPServer/**
+LXO_HEADERS = $(EXTERNAL_ROOT)/LXSDK/include $(EXTERNAL_ROOT)/LXSDK/LxoImportExport
+
+// Options:
+//   HL_HTTP_SERVER
+//   HL_USE_TEST_FLIGHT
+//   HL_USE_FLURRY
+HL_BUILD_SYMBOLS = HL_PROJECT_NAME=\"$(PROJECT_NAME)\" HL_PROJECT_DIR=\"$(PROJECT_DIR)\"
+
+// Paths
+HL_BUILD_HEADERS = $(HL_HEADERS) $(CL_HEADERS) $(LXO_HEADERS) $(HTTP_HEADERS)
+
+// Link setup
+HL_LINK_AUDIO_OSX = -framework AudioUnit -framework AudioToolbox
+HL_LINK_AUDIO_IOS = -framework AudioToolbox
+
+HL_LINK_FLURRY = -L$(EXTERNAL_ROOT)/Flurry/Flurry -lFlurry -framework Security -framework CoreLocation
+HL_LINK_TEST_FLIGHT = -L$(EXTERNAL_ROOT)/TestFlight -lTestFlight
+HL_LINK_HTTP_SERVER = -lxml2
+HL_LINK_UV_IOS = -L$(EXTERNAL_ROOT)/LibUV -luv_iOS
+HL_LINK_UV_OSX = -L$(EXTERNAL_ROOT)/LibUV -luv_OSX
+
+// For linking HL library
+HL_BUILD_LINK_FLAGS_IOS =
+HL_BUILD_LINK_FLAGS_OSX =
+
+// For linking app that uses HL
+HL_APP_LINK_OSX = $(CL_LINK_FLAGS_OSX) -all_load -ObjC -framework Cocoa -framework QuartzCore -framework OpenGL -framework AVFoundation $(HL_LINK_AUDIO_OSX) //
+HL_APP_LINK_IOS = $(CL_LINK_FLAGS_IOS) -all_load -ObjC -framework Foundation -framework UIKit -framework CoreGraphics -framework OpenGLES -framework QuartzCore -framework AVFoundation -framework CoreMotion -framework GameKit $(HL_LINK_AUDIO_IOS) // $(HL_LINK_FLURRY) $(HL_LINK_HTTP_SERVER)
+
+HL_APP_LINK[sdk=iphonesimulator*] = $(HL_LINK_FLAGS_IOS)
+HL_APP_LINK[sdk=iphoneos*] = $(HL_LINK_FLAGS_IOS)
+HL_APP_LINK[sdk=macosx*] = $(HL_LINK_FLAGS_OSX)
+
+// Config variables
+
+GCC_PREPROCESSOR_DEFINITIONS = $(PLATFORM_BUILD_SYMBOLS) $(CONFIG_BUILD_SYMBOLS) $(HL_BUILD_SYMBOLS) $(CL_BUILD_SYMBOLS) $(inherited)
+OTHER_CFLAGS = $(CONFIG_CFLAGS) $(PLATFORM_CFLAGS)
+HEADER_SEARCH_PATHS = $(HL_HEADERS) $(CL_HEADERS) $(inherited)

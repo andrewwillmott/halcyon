@@ -1,0 +1,1 @@
+afconvert -f AIFC -d ima4 "$1"

@@ -1,0 +1,4 @@
+defaults write com.apple.XCODE PBXIndentOnPaste No
+defaults write com.apple.dt.Xcode IDEBuildOperationMaxNumberOfConcurrentCompileTasks 4
+
+xcodebuild -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=4 ...

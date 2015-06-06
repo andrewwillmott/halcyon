@@ -1,0 +1,398 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; Linux 2.2.16-22uri-remix i686) [Netscape]">
+   <title>Simple Vector Library (documentation)</title>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
+&nbsp;
+<center><table BORDER=0 COLS=1 WIDTH="60%" HEIGHT="60" BGCOLOR="#FFFFCC" NOSAVE >
+<tr ALIGN=CENTER NOSAVE>
+<td NOSAVE><b><font size=+4><a href="index.html">Simple Vector Library</a></font></b><font size=-1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(1.3)</font></td>
+</tr>
+</table></center>
+
+<table BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#FFCC00" NOSAVE >
+<tr>
+<td><a NAME="index"></a><b><font size=+3><a href="#index">Contents</a></font></b></td>
+</tr>
+</table>
+
+<ul>
+<li>
+<a href="#description">Description</a></li>
+
+<li>
+<a href="#classes">Classes</a></li>
+
+<li>
+<a href="#indexing">Element Access</a></li>
+
+<li>
+<a href="#operators">Arithmetic Operators and Functions</a></li>
+
+<li>
+<a href="#constants">Constants</a></li>
+
+<li>
+<a href="#constructors">Constructors</a></li>
+
+<li>
+<a href="#io">Input and Output</a></li>
+
+<li>
+<a href="#xforms">Transformations</a></li>
+
+<li>
+<a href="#compiling">Compiling with SVL</a></li>
+
+<li>
+<a href="#opengl">Using SVL With OpenGL</a></li>
+
+<li>
+<a href="#author">Author</a></li>
+</ul>
+
+<table BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#FFCC00" NOSAVE >
+<tr VALIGN=CENTER NOSAVE>
+<td NOSAVE><a NAME="description"></a><b><font size=+3><a href="#index">Description</a></font></b></td>
+</tr>
+</table>
+
+<p>The Simple Vector Library (SVL) provides vector and matrix classes,
+as well as a number of functions for performing vector arithmetic with
+them. Equation-like syntax is supported via class operators, for example:
+<pre>&nbsp;&nbsp;&nbsp; #include "svl/SVL.h"
+
+&nbsp;&nbsp;&nbsp; Vec3&nbsp;&nbsp;&nbsp; v(1.0, 2.0, 3.0);
+&nbsp;&nbsp;&nbsp; Mat3&nbsp;&nbsp;&nbsp; m(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0);
+
+&nbsp;&nbsp;&nbsp; v =&nbsp; 2 * v + m * v;
+&nbsp;&nbsp;&nbsp; v *= (m / 3.0) * norm(v);
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; cout &lt;&lt; v &lt;&lt; endl;</pre>
+Both generic (arbitrarily-sized), and fixed-size (2, 3 and 4 element) vectors
+and matrices are supported. The latter are provided for the efficient manipulation
+of vectors or points in 2D or 3D space, and make heavy use of inlining
+for frequently-used operations. (One of the design goals of SVL was to
+ensure that it was as fast as the C-language, macro-based libraries it
+was written to replace.)
+<p>SVL is a subset of VL, a more extensive vector library, which in addition
+contains classes for sparse vector/matrices, sub-vector/matrices, and implementations
+of some iterative solvers. Whereas with SVL the component type of vectors
+and matrices is defined with a compile-time switch, with VL you specify
+the type explicitly (Vec2f, Vec2d) and can, for example, mix matrices of
+doubles with vectors of floats.
+<p>SVL requires C++. It is known to compile under Irix CC, g++, and MSVC.
+The latest version can be retrieved from <a href="http://www.cs.cmu.edu/~ajw/public/dist/">http://www.cs.cmu.edu/~ajw/public/dist/</a>.
+This documentation can be found online at <a href="http://www.cs.cmu.edu/~ajw/doc/svl.html">http://www.cs.cmu.edu/~ajw/doc/svl.html</a>.
+<br>&nbsp;
+<br>&nbsp;
+<table BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#FFCC00" NOSAVE >
+<tr VALIGN=CENTER NOSAVE>
+<td NOSAVE><a NAME="classes"></a><b><font size=+3><a href="#index">Classes</a></font></b></td>
+</tr>
+</table>
+
+<p>SVL contains the following types and classes:
+<pre>&nbsp;&nbsp;&nbsp; Fixed-size:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Real&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; component type (float or double)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vec2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2-vector
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vec3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3-vector
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vec4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4-vector
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mat2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 x 2 matrix
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mat3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 x 3 matrix
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mat4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4 x 4 matrix
+&nbsp;&nbsp;&nbsp; Generic:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vec&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; n-vector
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; n x m matrix</pre>
+&nbsp;
+<table BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#FFCC00" NOSAVE >
+<tr VALIGN=CENTER NOSAVE>
+<td NOSAVE><a NAME="indexing"></a><b><font size=+3><a href="#index">Element
+Access</a></font></b></td>
+</tr>
+</table>
+
+<p>The elements of a vector or matrix are accessed with standard C array
+notation:
+<pre>&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; v[2] = 4.0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // set element 2 of the vector
+&nbsp;&nbsp;&nbsp; m[3][4] = 5.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // set row 3, column 4 of the matrix
+&nbsp;&nbsp;&nbsp; m[2] = v;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // set row 2 of the matrix</pre>
+For the resizeable vector types, the current size can be obtained from
+the <i>Elts()</i> method for vectors, and the <i>Rows()</i> and <i>Cols()</i>
+methods for matrices. To iterate over all members of these types, you can
+use code of the form:
+<pre>&nbsp;&nbsp;&nbsp; for (i = 0; i &lt; v.Elts(); i++)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; v[i] = i;</pre>
+
+<pre>&nbsp;&nbsp;&nbsp; for (i = 0; i &lt; m.Rows(); i++)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (j = 0; j &lt; m.Cols(); j++)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m[i][j] = i + j;</pre>
+Though it seems slightly unintuitive, if you have a pointer to a vector
+or matrix, you must dereference it first before indexing it:
+<pre>&nbsp;&nbsp;&nbsp; (*vPtr)[20] = 3.0;</pre>
+If you need a pointer to the data belonging to a vector or matrix, use
+the Ref() method. (Matrices are stored by row.)
+<pre>&nbsp;&nbsp;&nbsp; Real *vecDataPtr = v.Ref(), *matDataPtr = m.Ref();</pre>
+<font color="#FF0000"><b>Warning</b>:</font> Any pointer to a generic matrix
+or vector will become invalid as soon as it is resized.
+<p><font color="#FF0000"><b>Note</b>:</font> If you compile with the symbol
+VL_DEBUG, index range checks will be performed on all element accesses.
+<br>&nbsp;
+<br>&nbsp;
+<table BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#FFCC00" NOSAVE >
+<tr VALIGN=CENTER NOSAVE>
+<td NOSAVE><a NAME="operators"></a><b><font size=+3><a href="#index">Arithmetic
+Operators and Functions</a></font></b></td>
+</tr>
+</table>
+
+<h3>
+Arithmetic Operators</h3>
+The following binary operators are defined for all vector and matrix classes,
+as long as both operands are of the same type.
+<pre>&nbsp;&nbsp;&nbsp; Basic arithmetic:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; + - * /
+&nbsp;&nbsp;&nbsp; Accumulation arithmetic:&nbsp; += -= *= /=
+&nbsp;&nbsp;&nbsp; Comparison:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ==, !=</pre>
+Vector multiplication and division is pairwise: (a * b)[i] = a[i] * b[i].
+(See below for how to form the dot product of two vectors with dot().)
+Matrix multiplication is defined as usual, and matrix division is undefined.
+<p>For both matrices and vectors, multiplication and division by a scalar
+is also allowed. Matrices can be multiplied either on the left or the right
+by a vector. In the expression m * v, v is treated as a column vector;
+in the expression v * m, it is treated as a row vector.
+<h3>
+Vector Functions</h3>
+The following is a list of the various vector functions, together with
+a short description of what they return.
+<pre>&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; Real dot(const VecN &amp;a, const VecN &amp;b);&nbsp;&nbsp;&nbsp;&nbsp; // inner product of a and b
+&nbsp;&nbsp;&nbsp; Real len(const VecN &amp;v);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // length of v: || v ||
+&nbsp;&nbsp;&nbsp; Real sqrlen(const VecN &amp;v);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // length of v, squared
+&nbsp;&nbsp;&nbsp; VecN norm(const VecN &amp;v);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // v / || v ||
+
+&nbsp;&nbsp;&nbsp; Vec2 cross(const Vec2 &amp;a);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // vector orthogonal to a&nbsp;
+&nbsp;&nbsp;&nbsp; Vec3 cross(const Vec3 &amp;a, const Vec3 &amp;b);&nbsp;&nbsp; // vector orthogonal to a and b
+&nbsp;&nbsp;&nbsp; Vec4 cross(const Vec4 &amp;a, const Vec4 &amp;b, const Vec4 &amp;c);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // vector orthogonal to a, b and c
+
+&nbsp;&nbsp;&nbsp; Vec2 proj(const Vec3 &amp;v);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // homog. projection: v[0..1] / v[2]
+&nbsp;&nbsp;&nbsp; Vec3 proj(const Vec4 &amp;v);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // homog. projection: v[0..2] / v[3]</pre>
+In the above, VecN is either a Vec or a Vec[234], and Real is a Float or
+a Double, depending on the argument type. For more on the use of the <i>proj()</i>
+operator, see <a href="#xforms">Transformations</a>.
+<h3>
+Matrix Functions</h3>
+The following functions can be used with matrices.
+<pre>&nbsp;&nbsp;&nbsp; MatN trans(const MatN &amp;m);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Transpose of m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; Real trace(const MatN &amp;m);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Trace of m
+&nbsp;&nbsp;&nbsp; MatN adj(const MatN &amp;m);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Adjoint of m
+&nbsp;&nbsp;&nbsp; Real det(const MatN &amp;m);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Determinant of m
+&nbsp;&nbsp;&nbsp; MatN inv(const MatN &amp;m);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Inverse of m, if it exists.</pre>
+In the above, MatN is any matrix type, a, though the <i>det()</i> and <i>adj()</i>
+functions are only defined for Mat[234].
+<br>&nbsp;
+<br>&nbsp;
+<table BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#FFCC00" NOSAVE >
+<tr VALIGN=CENTER NOSAVE>
+<td NOSAVE><a NAME="constants"></a><b><font size=+3><a href="#index">Constants</a></font></b></td>
+</tr>
+</table>
+
+<p>There are a number of 'magic' constants in SVL that can be used to initialise
+vectors or matrices with simple assignment statements. For example:
+<pre>&nbsp;&nbsp;&nbsp; Vec3 v; Mat3 m; Vec v8(8);
+
+&nbsp;&nbsp;&nbsp; v = vl_0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [0, 0, 0]
+&nbsp;&nbsp;&nbsp; v = vl_y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [0, 1, 0]
+&nbsp;&nbsp;&nbsp; v = vl_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [1, 1, 1]
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; m = vl_0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 x 3 matrix, all elts. set to zero.
+&nbsp;&nbsp;&nbsp; m = vl_1;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 x 3 identity matrix
+&nbsp;&nbsp;&nbsp; m = vl_B;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 x 3 matrix, all elts. set to one.
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; v8 = vl_axis(6);&nbsp;&nbsp;&nbsp; [0, 0, 0, 0, 0, 0, 1, 0]</pre>
+Below is a summary of the constants defined by SVL.
+<pre>&nbsp;&nbsp;&nbsp; vl_one/vl_1/vl_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vector of all 1s, or identity matrix
+&nbsp;&nbsp;&nbsp; vl_zero/vl_0/vl_Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vector or matrix of all 0s
+&nbsp;&nbsp;&nbsp; vl_B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; matrix of all 1s
+&nbsp;&nbsp;&nbsp; vl_x, vl_y, vl_z, vl_w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x, y, z and w axis vectors
+&nbsp;&nbsp;&nbsp; vl_axis(n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; zero vector with element n set to 1
+&nbsp;&nbsp;&nbsp; vl_pi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pi!
+&nbsp;&nbsp;&nbsp; vl_halfPi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pi/2</pre>
+&nbsp;
+<table BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#FFCC00" NOSAVE >
+<tr VALIGN=CENTER NOSAVE>
+<td NOSAVE><a NAME="constructors"></a><b><font size=+3><a href="#index">Constructors</a></font></b></td>
+</tr>
+</table>
+
+<p>In general, a vector or matrix constructor should be given either one
+of the initialiser constants listed above, or a list of values for its
+elements. If neither of these is supplied, the variable will be uninitialised.
+The first arguments to the constructor of a generic vector or matrix should
+always be the required size. Thus matrices and vectors are declared as
+follows:
+<pre>&nbsp;&nbsp;&nbsp; Vec[234]&nbsp;&nbsp;&nbsp; v([initialisation_constant | element_list]);
+&nbsp;&nbsp;&nbsp; Vec&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; v([elements, [initialisation_constant | element_list]]);
+&nbsp;&nbsp;&nbsp; Mat[234]&nbsp;&nbsp;&nbsp; m([initialisation_constant | element_list]);
+&nbsp;&nbsp;&nbsp; Mat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m([rows, columns, [initialisation_constant | element_list]]);</pre>
+If generic vectors or matrices are not given a size when first created,
+they are regarded as empty, with no associated storage. This state persists
+until they are assigned a matrix/vector or the result of some computation,
+at which point they take on the dimensions of that result.
+<p>Examples:
+<pre>&nbsp;&nbsp;&nbsp; Vec3&nbsp;&nbsp;&nbsp; v(vl_1);
+&nbsp;&nbsp;&nbsp; Vec3&nbsp;&nbsp;&nbsp; v(1.0, 2.0, 3.0);
+&nbsp;&nbsp;&nbsp; Vec&nbsp;&nbsp;&nbsp;&nbsp; v(6, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0);&nbsp;
+&nbsp;&nbsp;&nbsp; Vec&nbsp;&nbsp;&nbsp;&nbsp; v(20, vl_axis(10));
+&nbsp;&nbsp;&nbsp; Mat2&nbsp;&nbsp;&nbsp; m(1.0, 2.0, 3.0, 4.0);
+&nbsp;&nbsp;&nbsp; Mat&nbsp;&nbsp;&nbsp;&nbsp; m(10, 20, vl_I);</pre>
+<b>Warning</b>: When initialising a generic vector or matrix with a list
+of elements, you must always ensure there is no possibility of the element
+being mistaken for an integer. (This is due to limitations of the stdarg
+package.) Make sure that each element value has either an exponent or a
+decimal point, i.e., use '2.0' rather than just '2'.
+<p>Finally, to set the size of a empty matrix or vector explicitly, or
+resize an existing matrix or vector, use the SetSize method:
+<pre>&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; v.SetSize(23);
+&nbsp;&nbsp;&nbsp; m.SetSize(10, 20);</pre>
+&nbsp;
+<table BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#FFCC00" NOSAVE >
+<tr VALIGN=CENTER NOSAVE>
+<td NOSAVE><a NAME="io"></a><b><font size=+3><a href="#index">Input and
+Output</a></font></b></td>
+</tr>
+</table>
+
+<p>All of the vector and matrix types in SVL can be used in iostream-type
+expressions. For example:
+<pre>&nbsp;&nbsp;&nbsp; #include &lt;iostream.h>
+&nbsp;&nbsp;&nbsp; Vec3 v(vl_1);
+&nbsp;&nbsp;&nbsp; cout &lt;&lt; v &lt;&lt; 2 * v &lt;&lt; endl;
+&nbsp;&nbsp;&nbsp; cin >> v;</pre>
+will output
+<pre>&nbsp;&nbsp;&nbsp; [1 1 1][2 2 2]</pre>
+and then prompt for input. Vectors and matrices are parsed in the same
+format that they are output: vectors are delimited by square brackets,
+elements separated by white space, and matrices consist of a series of
+row vectors, again delimited by square brackets.
+<br>&nbsp;
+<br>&nbsp;
+<table BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#FFCC00" NOSAVE >
+<tr VALIGN=CENTER NOSAVE>
+<td NOSAVE><a NAME="xforms"></a><b><font size=+3><a href="#index">Transformations</a></font></b></td>
+</tr>
+</table>
+
+<p>The following are the transformations supported by SVL.
+<pre>&nbsp;&nbsp;&nbsp; Mat2&nbsp;&nbsp;&nbsp; Rot2(Real theta)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // rotate a 2d vector CCW by theta
+&nbsp;&nbsp;&nbsp; Mat2&nbsp;&nbsp;&nbsp; Scale2(const Vec2 &amp;s)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // scale by s around the origin
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; Mat3&nbsp;&nbsp;&nbsp; HRot3(Real theta)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // rotate a homogeneous 2d vector CCW by theta
+&nbsp;&nbsp;&nbsp; Mat3&nbsp;&nbsp;&nbsp; HScale3(const Vec2 &amp;s)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // scale by s around the origin, in homogeneous 2d coords.
+&nbsp;&nbsp;&nbsp; Mat3&nbsp;&nbsp;&nbsp; HTrans3(const Vec2 &amp;t)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // translate a homogeneous 2d vector by t
+
+&nbsp;&nbsp;&nbsp; Mat3&nbsp;&nbsp;&nbsp; Rot3(const Vec3 &amp;axis, Real theta)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // rotate a 3d vector CCW around axis by theta
+&nbsp;&nbsp;&nbsp; Mat3&nbsp;&nbsp;&nbsp; Rot3(const Vec4 &amp;q)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // rotate a 3d vector by the quaternion q
+&nbsp;&nbsp;&nbsp; Mat3&nbsp;&nbsp;&nbsp; Scale3(const Vec3 &amp;s)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // scale by s around the origin
+
+&nbsp;&nbsp;&nbsp; Mat4&nbsp;&nbsp;&nbsp; HRot4(const Vec3 &amp;axis, Real theta)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // rotate a homogeneous 3d vector CCW around axis by theta
+&nbsp;&nbsp;&nbsp; Mat4&nbsp;&nbsp;&nbsp; HRot4(const Vec4 &amp;q)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // rotate a homogeneous 3d vector by the quaternion q
+&nbsp;&nbsp;&nbsp; Mat4&nbsp;&nbsp;&nbsp; HScale4(const Vec3 &amp;s)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // scale by s around the origin, in homogeneous 3d coords
+&nbsp;&nbsp;&nbsp; Mat4&nbsp;&nbsp;&nbsp; HTrans4(const Vec3 &amp;t)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // translate a homogeneous 3d vector by t</pre>
+Transformations with a prefix of 'H' operate in the homogeneous coordinate
+system, which allows translation and shear transformations, as well as
+the usual rotation and scale. In this coordinate system an n-vector is
+embedded in a (n+1)-dimensional space, e.g., a homogeneous point in 2d
+is represented by a 3-vector.
+<p>To convert from non-homogeneous to homogeneous vectors, make the extra
+coordinate (usually 1) the second argument in a constructor of/cast to
+the next-higher dimension vector. To project from a homogeneous vector
+down to a non-homogeneous one (doing a homogeneous divide in the process),
+use the proj() function. This process can be simplified by the use of the
+xform() function, which applies a transform to a vector, doing homogeneous/nonhomogeneous
+conversions if necessary. For example:
+<pre>&nbsp;&nbsp;&nbsp; Vec3 x,y;
+
+&nbsp;&nbsp;&nbsp; // apply homogeneous transformations to a 3-vector&nbsp;
+&nbsp;&nbsp;&nbsp; x = proj(Scale4(...) * Rot4(...) * Trans4(...) * Vec4(y, 1.0));
+&nbsp;&nbsp;&nbsp; // do the same thing with xform()
+&nbsp;&nbsp;&nbsp; x = xform(Scale4(...) * Rot4(...) * Trans4(...), y);</pre>
+By default, SVL assumes that transformations should operate on column vectors
+(v = T * v), though it can be compiled to assume row vectors instead (v
+= v * T).
+<br>&nbsp;
+<br>&nbsp;
+<table BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#FFCC00" NOSAVE >
+<tr VALIGN=CENTER NOSAVE>
+<td NOSAVE><a NAME="compiling"></a><b><font size=+3><a href="#index">Compiling
+with SVL</a></font></b></td>
+</tr>
+</table>
+
+<h3>
+Headers</h3>
+For basic use, the only header file needed is svl/SVL.h.
+<h3>
+Linking</h3>
+For your final build, link with -lsvl (libsvl.a). To use the debugging
+version of SVL, which has assertions and range checking turned on, use
+-lsvl.dbg (libsvl.dbg.a), and compile with the VL_DEBUG symbol. This debugging
+version includes checks for correct matrix and vector sizes during arithmetic
+operations.
+<h3>
+Compile options</h3>
+SVL uses the following compile-time options:
+<pre>&nbsp;&nbsp;&nbsp; VL_FLOAT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - use floats instead of doubles
+&nbsp;&nbsp;&nbsp; VL_DEBUG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - turn on index checking and assertions
+&nbsp;&nbsp;&nbsp; VL_ROW_ORIENT&nbsp;&nbsp; - transformations operate on row vectors instead of column vectors</pre>
+&nbsp;
+<table BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#FFCC00" NOSAVE >
+<tr VALIGN=CENTER NOSAVE>
+<td NOSAVE><a NAME="opengl"></a><b><font size=+3><a href="#index">Using
+SVL With OpenGL</a></font></b></td>
+</tr>
+</table>
+
+<p>SVL comes with a header file, SVLgl.h, which makes using SVL vectors
+with OpenGL more convenient. For example:
+<pre>&nbsp;&nbsp;&nbsp; #include "svl/SVLgl.h"
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; Vec3 x(24, 0, 100), y(40, 20, 10);
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; glBegin(GL_LINES);
+&nbsp;&nbsp;&nbsp; glVertex(x);&nbsp;
+&nbsp;&nbsp;&nbsp; glVertex(y);
+&nbsp;&nbsp;&nbsp; glEnd();</pre>
+&nbsp;
+<table BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#FFCC00" NOSAVE >
+<tr VALIGN=CENTER NOSAVE>
+<td NOSAVE><a NAME="author"></a><b><font size=+3><a href="#index">Author</a></font></b></td>
+</tr>
+</table>
+
+<p>Please forward bug reports, comments, or suggestions to:
+<address>
+Andrew Willmott (<a href="mailto:ajw+vl@cs.cmu.edu">ajw+svl@cs.cmu.edu</a>),
+Graphics Group, SCS, CMU.</address>
+
+</body>
+</html>

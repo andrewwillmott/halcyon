@@ -1,0 +1,18 @@
+////////////////////////////////////////////////////////////////////////////////
+//  Debug.xcconfig
+//
+
+GCC_OPTIMIZATION_LEVEL = 0
+
+DEPLOYMENT_POSTPROCESSING = NO
+
+DEAD_CODE_STRIPPING = NO
+
+COPY_PHASE_STRIP = NO
+
+GCC_GENERATE_DEBUGGING_SYMBOLS = YES
+
+ONLY_ACTIVE_ARCH = YES
+
+CONFIG_BUILD_SYMBOLS = CL_DEBUG
+GCC_PREPROCESSOR_DEFINITIONS = $(CONFIG_BUILD_SYMBOLS) $(inherited)

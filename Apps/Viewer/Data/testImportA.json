@@ -1,0 +1,6 @@
+{
+    childA: "hello",
+    childB: { doh: "hello" },
+    childC: [ "hello" ],
+    childD: { doh: "hello" },
+}

@@ -1,0 +1,15 @@
+{
+    // Some test textures
+    effect:
+    {
+        image: "effects-star.png"
+    },
+    particleGrid:
+    {
+        image: "effects-grid.png"
+    },
+    particleTiles:
+    {
+        image: "effects-tiles.tga"
+    }
+}

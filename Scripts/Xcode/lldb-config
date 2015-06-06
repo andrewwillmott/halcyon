@@ -1,0 +1,29 @@
+command alias v frame variable
+command alias px p -f hex --
+command alias ps p -f s --
+command alias e expr
+command alias ex e -f hex --
+command alias es e -f s --
+
+# VecN
+type summary add -s "[${var.elt[0]}, ${var.elt[1]}]" -x "^Vec2[fi]$"
+type summary add -s "[${var.elt[0]}, ${var.elt[1]}, ${var.elt[2]}]" -x "^Vec3[fi]$"
+type summary add -s "[${var.elt[0]}, ${var.elt[1]}, ${var.elt[2]}, ${var.elt[3]}]" -x "^Vec4[fi]$"
+
+# cTransform etc.
+type summary add -s "T: ${var.mTranslation}, S: ${var.mScale}, R: ${var.mRotation.row[0-2]}" nCL::cTransform
+type summary add -s "min: ${var.mMin}, max: ${var.mMax}" nCL::cBounds2
+type summary add -s "min: ${var.mMin}, max: ${var.mMax}" nCL::cBounds3
+
+type summary add -s "${var%s}" nCL::tStrConst
+
+# USTL
+type summary add -s "${var.m_Data}, size: ${var.m_Size}, capacity: ${var.m_Capacity}" -x "ustl::vector<.*>$"
+type summary add -s "${var.m_Data}, size: ${var.m_Size}, capacity: ${var.m_Capacity}" -x "ustl::map<.*>$"
+type summary add -s "${var.m_Data%s}, size: ${var.m_Size}, capacity: ${var.m_Capacity}" "ustl::string"
+
+# CL
+type format add -f s tTag
+
+# Extensions
+command script import ~/lldb/parray.py

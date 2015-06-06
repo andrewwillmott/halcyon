@@ -1,0 +1,53 @@
+// Master config file for UIProto
+
+{
+    import:
+    [
+        { file: "Shared/log.json", to: log },
+
+        { file: "Shared/Materials/materials.json",  to: materials },
+        { file: "Shared/testEffects.json",  to: effects, notConfig: Release },
+    ],
+
+    log:
+    {
+	    // bonjour: Tungsten
+	    // host: "tungsten.local."
+    },
+
+    timeScale: 1.0,
+    vsync: 1,
+
+    camera:
+    {
+        pitch: 35,
+        heading: 45,
+        relativeDistance: 200
+    },
+
+    render:
+    {
+        flags:
+        {
+            debug: 0
+        },
+
+        layers:
+        {
+            main:
+            {
+                commands:
+                [
+                    { camera: main },
+                    { frameBuffer: default },
+                    { clear: [0.5, 0.4, 0.5, 0] },
+                    { drawLayer: background   },
+                    { drawLayer: models },
+                    { drawLayer: particles },
+                    { drawLayer: debugDraw },
+                    { drawLayer: screens },
+                ]
+            },
+    	}
+    },
+}

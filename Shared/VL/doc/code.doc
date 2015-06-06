@@ -1,0 +1,278 @@
+A lot of this is out of date.
+
+---------------------------------------------------------
+	Notes about VL code & coding style
+---------------------------------------------------------
+
+
+To do
+-----
+
+Fix prototypes wrt RotMat etc.
+SubSMat etc.
+
+
+Enable tensor types: Matrices of vectors, etc.
+	- done for [N] types.
+	- brings up interesting points: would like to avoid inlines for this
+		lot
+		
+One large remaining optimisation: replacing 
+	for (...) a[i] = ...
+with
+	for (...) *a++ = ...
+Remember that M[i] returns a class, rather than a pointer.
+
+
+Release v3.0
+	Final checks
+	Documentation.
+
+Misc
+
+Done
+----
+
+Improve Linked List
+	Ability to add nodes
+	Separate out safe iterators.
+	Doubly-linked list
+	- replaced with List.cc
+Improve sparse vector implementation
+	Remove LL stuff
+	See whether we can't fall back to Array
+		must do!
+	remove usage of [] in arith. operators.
+	MakeBlock/Zero -> Clear?
+	constants for VecN/MatN?
+Andy fixes
+	See additions.cc
+Add generic vector type to aVoid #ifdefs in Vec.h: no
+more #ifdef __Vec2__...
+	- Decided best just to remove ifdefs altogether.
+	
+check whether Vec::isRef is the high bit.
+	!! look at C manual?
+
+Environment
+-----------
+SELF stands in for (*this)
+
+Assert & Warning provided
+	
+Types: Int, UInt, Int32 etc.
+
+Style
+-----
+
+Naming
+
+BLAH_BLAH		macros
+BlahBlah		types, including classes
+blahBlah		variables
+kBlahBlah		constants
+gBlahBlah		global variables
+fBlahBlah		flags (boolean)
+sBlahBlah		static class variables
+
+BlahBlah		function names 
+				(a case could be made for making these lowercase, but at
+				the moment stick with this.)
+
+functions: 		names are nouns/adjectival phrases.
+procedures:		names are verbs.
+actions:		names are Jogger, Builder, Runner, etc.
+
+
+Types
+-----
+
+SparseVec
+Vec SubSVec
+SubVec Vec2 Vec3 Vec4
+
+				SparseVec
+		Vec   			 SubSVec
+Vec2 Vec3 Vec4 SubVec
+
+
+
+
+Iterators
+---------
+
+???
+
+VL Notes '95
+------------
+
+Templates mean:
+
+Can have integer-based vectors too, for screen coords etc. 
+Can have mixed matrix/vector classes. E.g. Matrices of doubles that interact
+with vectors of floats (a la Paul) or, even cooler, Matrices of fixed type that
+interact with short vectors.
+
+Inlines
+
+Where to stop! Take the view that after a certain point inlining doesn't save much. 
+Inline almost all vector ops, but only the 2D matrix ops. (Is even this excessive?)
+
+Filling out a basis:
+
+1. Orthonormalise initial set of vectors
+2. Form a vector v of the sum of the squares of the vectors
+3. find smallest component of vector, say i: add e(i) to the set, orthonormalise against the
+other vectors, and update v
+4. repeat 3 until done.
+
+-- v, or more precisely sqrt(v), is a measure of how much of the complete (square) space the 
+current vector set spans. (1 1 1 ...) means it spans everything, (0 0 0 ...) nothing. 
+ 
+-- The orthonormalising step is necessary, otherwise projecting the e(i) vectors onto the set
+(which is what 2. essentially does) would be correspondingly more complex.
+
+-- The vectors that were required to fill out the basis are the column space of the matrix
+with a row space of the initial vector set and vice versa. Thus if the original set was a
+list of constraints, the added set will span the corresponding space delineated by these constraints.
+
+trivial E.g., (1 0 0).x = 0  == s(0 1 0) + t (0 0 1)
+
+-- this procedure makes no attempt to preserve right or left-handedness. Perhaps should be a post-
+processing step to do this? 
+
+
+
+Vector types:
+
+Normal
+Sub (Scatter/gather)
+Sparse
+
+Interoperability desired:
+	Complete?
+	Self + constructor + 
+	All <-> vanilla
+	
+Solutions:
+1. virtual index operator 
+
+2. 2 versions of each function: global, & one for yourself.
+
+
+
+---
+
+Levels:
+
+(1) 2D, 3D, 4D Vectors
+
+- optimised
+
+(2) Define TEMPLATE_VL
+
+- Can 
+
+(3) Vec
+
+- Simple array-type n-d vectors & matrices
+
+(4) General vm classes: Sparse vms, and scatter/gather vms. Complete inter-operability. General vec
+degenerates to (3).
+
+---
+
+
+Vector:
+
+BVec: (), ref, optimised +-*/
+
+
+GVec: A, virtual (), generic +-*/
+
+SVec: B, sparse implementation...
+SubVec: B, sparse implementation
+
+
+Matrix:
+
+---
+
+Lists
+
+for sparse:
+
+- May want to insert at various positions
+- Array vectors would be nice.
+
+Dynamic array
+
+Linked list
+
+Mixed (ll of das!)
+
+---
+
+Four flavors of MV type: Std, SubStd, Sparse, SubSparse
+
+We would like to have typed-templates, so that we could
+easily template one set of operations on all four classes, without running the
+risk of 'snatching' other operations, or confusing TMat * TMat with TMat * TVec etc.
+
+C++ of course cannot give us this, because it is hopelessly broken.
+
+---
+
+Take fall-back route: conversion operators + equals operators. Can't see any easy way around this.
+Alternative appears to be to hand-instantiate everything. Requires:
+
+1] mirror functions
+2] like vs unlike macro inst. and like vs like inst.
+3] 
+
+Real sticking point is *:
+vec * vec
+vec * mat
+mat * mat
+
+Would have to make only one of these 'legal' & the rest work via. conversion.
+
+--------------------------------------
+
+Things to fix
+-------------
+
+Sparse vectors
+Get rid of UnitVec etc. C++'s type system can't support it.
+
+Additions
+---------
+Conversion from (float *) to Vec. More elegant change than ref? 
+Library
+
+Vecd silenetly converts scalars to itself!
+Vecd(1, 0) matched by more than one template?
+
+MaxElt
+MaxEltIndex
+MaxAbsElt
+...
+per-element min/maxes.
+
+Sign()?
+
+Vec<T> + T? (== Vec<T> + BlockVec<T>)
+
+Partial cross products?
+
+3-point cross? (cross(a, b, c) = (a - b) x (c - b)
+
+Rename SG to Sub
+
+Generalise [X*, int]
+
+Split <float,double> routines off from Mat, so we can reduce Mat<X,X> to Mat<X>
+Shift inv from Solve.cc to Mat.cc
+Shift inlines into .h files
+Shift templates into .t files
+Kill fancy #include methods (more trouble than they're worth.)

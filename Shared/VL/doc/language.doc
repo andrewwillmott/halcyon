@@ -1,0 +1,53 @@
+--------------------------------------------------------------------------
+Random notes on language features etc. related to VL
+--------------------------------------------------------------------------
+
+Type conversion
+---------------
+We cannot have automatic conversion from X -> Y and vice versa. Therefore we
+have a type pyramid: travelling down the pyramid is automatic, travelling up
+it requires explicit casting.
+
+In OO programming, automatic casting is typically carried out from a class to
+any of its base classes. Casting the other way should be done by function. In
+C++, creator functions should *not* be used for this, as they are used for
+automatic casting. Use functions of the form Make<Type> instead.
+
+To clarify: when casting down the type-pyramid, normally no actual conversion
+is needed. When going the other way, you must check
+
+Down casting is not always trivial. Consider conversions between floats and integers.
+Strictly speaking, integers are a subtype of floats, and hence integers->floats
+automatically. However in this case a format change is required.
+
+Vec and SubVec in VL provide a fascinating case study. While SubVec would normally be
+the supertype of Vec (it is more general, and more flexible), we wish to implement
+only one set of operators, and for efficiency reasons choose Vec. Thus SubVec + Vec
+results in the SubVec being copied into a (normal) vector, and then added to the Vec.
+This leads to an interesting question: would it be worthwhile implementing operators
+for SparseVec, too? If that were the case, the Vec would be cast to an SubVec, but in
+this case no copying would take place (an SubVec is essentially a pointer into a Vec
+with stride and length information), and the resulting add would be more efficient.
+
+Another interesting case is conversion between Vec and SparseVec. While both have their full
+complement of operators, again for efficiency reasons we would like to implement a Vec *
+SparseVec operator. 
+
+N.B., if we ever had two types that belonged to the same level of the pyramid, the solution
+is to use an upcast/downcast. E.g. C is a supertype of A, B. Then A = MakeA(B), and vice versa.
+Most importantly, the up/down cast could be incorporated into a single MakeA function, using 
+argument overloading.
+
+Where to place the conversion routines in the module structure is also an interesting question.
+If B>A, and B contains the type conversion routines, we can't use B without A, and vice versa.
+Which is the best alternative?
+
+
+Function Overloading
+--------------------
+
+Two questions here, in relation to C++:
+	Can we justify ignoring the return type of a function when overloading?
+	Can we justify ignoring the return type of a function when templating?
+	
+	Gut instinct says no!

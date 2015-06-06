@@ -1,0 +1,27 @@
+{
+    // Some test sounds
+    blip:
+    {
+        file: "blip.wav",
+    },
+    explode:
+    {
+        file: "explode.wav",
+    },
+    hit:
+    {
+        file: "hit.wav",
+    },
+    pickup:
+    {
+        file: "pickup.wav",
+    },
+    powerup:
+    {
+        file: "powerup.wav",
+    },
+    win:
+    {
+        file: "win.wav",
+    },
+}

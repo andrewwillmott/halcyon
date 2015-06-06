@@ -1,0 +1,33 @@
+#!/usr/bin/perl
+use IO::Socket;
+
+my $port = 8888;
+my $host = shift || "localhost";
+
+$host = $1 if $host =~ /(\S+)/; # untaint address
+$port = $1 if $port =~ /(\d+)/; # untaint port number
+
+print "connecting to $host:$port\n";
+
+$remote = IO::Socket::INET->new(
+                    Proto    => "tcp",
+                    PeerHost => "$host",
+                    PeerPort => "$port",
+                )
+              or die "cannot connect to port at localhost";
+
+$remote->autoflush(1);
+
+$lineIn = <$remote>;
+print $lineIn;
+
+print $remote "build @ARGV\n";
+
+print "Issued build command\n";
+
+$lineIn = <$remote>;
+print $lineIn;
+
+print $remote "quit\n";
+
+close $remote;

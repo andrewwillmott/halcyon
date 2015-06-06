@@ -1,0 +1,4 @@
+#!/usr/bin/env python
+import socket
+s=socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.sendto('\xff'*6+'\x04\x0C\xCE\xE3\x99\x68'*16, ('10.0.88.10', 80))

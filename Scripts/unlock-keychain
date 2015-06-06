@@ -1,0 +1,1 @@
+security unlock-keychain $HOME/Library/Keychains/login.keychain 

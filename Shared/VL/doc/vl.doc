@@ -1,0 +1,97 @@
+--- headers
+
+VLf.h
+	include for VLf types
+VLd.h
+	include for VLd types
+VLfd.h
+
+--- types
+
+Real
+void
+
+Vec2[fd]
+	2-vector
+Vec3[fd]
+	3-vector
+Vec4[fd]
+	4-vector
+Vec[fd]
+	n-vector
+SubVec[fd]
+	subvector of a vector or matrix
+SparseVec[fd]
+	sparse vector
+SubSVec[fd]
+	Sub-vector of a sparse vector or matrix.
+--- operations
+
+Vector:
+
+Real dot(const TVec4 &a, const TVec4 &b);// v . a	
+Real len(const TVec4 &v);				// || v ||
+Real sqrlen(const TVec4 &v);             // v . v
+Vec4 norm(const TVec4 &v);               // v / || v ||
+void normalise(TVec4 &v);				// v = norm(v)
+Vec4 cross(const TVec4 &a, const TVec4 &b, const TVec4 &c);
+Vec3 proj(const TVec4 &v);               // hom. projection
+
+'dot' returns the dot product of ...
+
+Matrix:
+
+TMat3 trans(const TMat3 &m);			// Transpose			
+TReal trace(const TMat3 &m);			// Trace
+TMat3 adj(const TMat3 &m);				// Adjoint
+TReal det(const TMat3 &m);				// Determinant
+TMat3 inv(const TMat3 &m);				// Inverse
+
+Sub:
+sub(int start, int width)
+col(i)
+diag(i)
+sub(int left, top, width, height)
+
+#include "MatN.h"
+MatN inv()
+
+--- Transformations
+
+Rot
+
+
+--- Sub functions
+
+A submatrix can be assigned to, and can be converted to a normal matrix.
+
+--- concepts
+
+x = vl_one;
+f(vl_c(2));
+
+
+--- row order
+
+VL stores its matrices in row major order. (...) For the 
+
+
+--- Templating
+
+
+--- constants
+
+
+vl_zero/vl_0
+vl_one/vl_I = 1/vl_1
+vl_Z
+vl_B
+
+vl_x, vl_y, vl_z, vl_w
+
+vl_axis(i)
+vl_b/vl_block(i)
+
+Vec3d x = vl_one;
+
+

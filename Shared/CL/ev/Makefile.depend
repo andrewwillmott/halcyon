@@ -1,0 +1,4 @@
+EV.o: EV.cpp
+EV.do: EV.cpp
+EV.o: EV.cpp
+.plibs: /Users/ajw/reactor/lib/libcl.a

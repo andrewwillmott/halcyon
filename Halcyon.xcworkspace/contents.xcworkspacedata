@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:Config"
+      name = "Config">
+      <FileRef
+         location = "group:CL.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:CLConfig.h">
+      </FileRef>
+      <Group
+         location = "group:Combos"
+         name = "Combos">
+         <FileRef
+            location = "group:Debug-iOS.xcconfig">
+         </FileRef>
+         <FileRef
+            location = "group:Debug-OSX.xcconfig">
+         </FileRef>
+         <FileRef
+            location = "group:Develop-iOS.xcconfig">
+         </FileRef>
+         <FileRef
+            location = "group:Develop-OSX.xcconfig">
+         </FileRef>
+         <FileRef
+            location = "group:Release-iOS.xcconfig">
+         </FileRef>
+         <FileRef
+            location = "group:Release-OSX.xcconfig">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:Debug.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:Develop.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:GLConfig.h">
+      </FileRef>
+      <FileRef
+         location = "group:HL.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:iOS.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:OSX.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:Release.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:VLConfig.h">
+      </FileRef>
+      <FileRef
+         location = "group:XcodeSettings.txt">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Apps">
+      <FileRef
+         location = "group:Apps/Demo/Demo.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Apps/Viewer/Viewer.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Apps/UIProto/UIProto.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Apps/Sound/SoundProto.xcodeproj">
+      </FileRef>
+   </Group>
+</Workspace>

@@ -1,0 +1,3 @@
+#include "../OSX.xcconfig"
+#include "../Release.xcconfig"
+#include "../HL.xcconfig"

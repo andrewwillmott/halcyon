@@ -1,0 +1,153 @@
+// config file for audio test app
+
+// Master config file for Viewer
+
+{
+    import:
+    [
+        { file: "Shared/log.json", to: log },
+
+        { file: "Shared/Materials/materials.json",  to: materials },
+        { file: "Shared/testEffects.json",  to: effects, notConfig: Release },
+
+        { file: "Shared/Sounds/sounds.json", to: sounds },
+    ],
+
+    log:
+    {
+        groups:
+        {
+            Effects:  { logLevel: 4, debugger: true },
+        }
+	    // bonjour: Tungsten
+	    // host: "tungsten.local."
+    },
+
+    timeScale: 1.0,
+    vsync: 1,
+
+    camera:
+    {
+        pitch: 35,
+        heading: 45,
+        relativeDistance: 200
+    },
+
+    audio:
+    {
+        units:
+        {
+            master:
+            {
+                type: master,
+            },
+        
+            mixer:
+            {
+                type: mixer,
+                
+                channels:
+                [
+                    { source: 0, stereo: true },
+                    { source: 1, stereo: false },
+                    { source: 2, stereo: true },
+                    { source: 3, stereo: true },
+                    { source: 4, stereo: true },
+                    { source: 5, stereo: true },
+                    { source: 6, stereo: true },
+                    { source: 7, stereo: false },
+                ],
+            },
+        
+            reverb:
+            {
+                type: reverb,
+                dryWetMix: 20,     // 0-100
+            }
+        },
+        
+        connections:
+        [
+//            { from: mixer, fromBus: 0, to: master, toBus: 0 },
+            { from: mixer, fromBus: 0, to: reverb, toBus: 0 },
+            { from: reverb, fromBus: 0, to: master, toBus: 0 }
+        ]
+    },
+
+    sounds:
+    {
+        drums:
+        {
+            file: "sounds/Kong 1",
+            sync: true,
+            loop: true
+        },
+        synth:
+        {
+            file: "sounds/Thor 1",
+            sync: true,
+            loop: true
+        },
+        pad:
+        {
+            file: "sounds/Thor 2",
+//            file: "../../../Content/Audio/bubbling-sea.aiff",
+            sync: true,
+            loop: true
+        },
+        top:
+        {
+            file: "sounds/Thor 3",
+            sync: true,
+            loop: true
+        },
+        bubble:
+        {
+            file: "sounds/bubble",
+            loop: false
+        },
+        airlock:
+        {
+            file: "sounds/airlock-door.wav",
+            repeat: 1
+        }
+    },
+
+    effects:
+    {
+        groups:
+        {
+            multiSoundTest:
+            {
+                effects:
+                [
+                    { type: sound, id: soundTest },
+                    { type: sound, id: soundTest },
+                    { type: sound, id: soundATest },
+                    { type: sound, id: soundBTest },
+                    { type: sound, id: soundCTest },
+                ]
+            }
+        },
+        
+        sounds:
+        {
+            soundTest:
+            {
+                sound: blip
+            },
+            soundATest:
+            {
+                sound: powerup
+            },
+            soundBTest:
+            {
+                sound: explode
+            },
+            soundCTest:
+            {
+                sound: pickup
+            },
+        }
+    }
+}

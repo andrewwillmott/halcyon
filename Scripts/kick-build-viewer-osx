@@ -1,0 +1,3 @@
+#!/bin/sh
+BASE="$(dirname $0)"
+$BASE/kick-build 10.0.88.10 viewer-osx

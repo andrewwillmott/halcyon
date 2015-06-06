@@ -1,0 +1,658 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta name="GENERATOR"
+ content="Mozilla/4.61 [en] (X11; I; Linux 2.2.12-20 i686) [Netscape]">
+  <title>VL: The VL Vector Library (documentation)</title>
+</head>
+<body alink="#ff0000" bgcolor="#ffffff" link="#0000ee" text="#000000"
+ vlink="#551a8b">
+&nbsp;
+<center>
+<table nosave="" bgcolor="#ffffcc" border="0" cols="1" height="60"
+ width="60%">
+  <tbody>
+    <tr nosave="" align="center">
+      <td nosave=""><b><font size="+4"><a href="index.html">VL: Vector
+Library</a></font></b><font size="-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(1.2)</font></td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr>
+      <td><a name="index"></a><b><font size="+3"><a href="#index">Contents</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+<ul>
+  <li>
+    <a href="#description">Description</a></li>
+  <li>
+    <a href="#classes">Classes</a></li>
+  <li>
+    <a href="#indexing">Element Access</a></li>
+  <li>
+    <a href="#operators">Arithmetic Operators and Functions</a></li>
+  <li>
+    <a href="#constants">Constants</a></li>
+  <li>
+    <a href="#constructors">Constructors</a></li>
+  <li>
+    <a href="#io">Input and Output</a></li>
+  <li>
+    <a href="#xforms">Transformations</a></li>
+  <li>
+    <a href="#sparse">Sparse Vectors and Matrices</a></li>
+  <li>
+    <a href="#sub">Sub Vectors</a></li>
+  <li>
+    <a href="#solvers">Solving Systems of Linear Equations</a></li>
+  <li>
+    <a href="#factor">Factoring Matrices</a></li>
+  <li>
+    <a href="#compiling">Compiling with VL</a></li>
+  <li>
+    <a href="#opengl">Using VL With OpenGL</a></li>
+  <li>
+    <a href="#author">Author</a></li>
+</ul>
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="description"></a><b><font size="+3"><a
+ href="#index">Description</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+<p>The Vector Library (VL) provides a set of vector and matrix classes,
+as well as a number of functions for performing arithmetic with them.
+Equation-like
+syntax is supported via C++ class operators, for example:
+</p>
+<pre>&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp; #include "VLfd.h"<br>&nbsp;&nbsp;&nbsp; Vec3f&nbsp;&nbsp; v(1.0, 2.0, 3.0);<br>&nbsp;&nbsp;&nbsp; Mat3d&nbsp;&nbsp; m(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0);<br><br>&nbsp;&nbsp;&nbsp; v =&nbsp; 2 * v + m * v;<br>&nbsp;&nbsp;&nbsp; v *= (m / 3.0) * norm(v);<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp; cout &lt;&lt; v &lt;&lt; endl;</pre>
+Both generic (arbitrarily-sized), and fixed-size (2, 3 and 4 element)
+vectors
+and matrices are supported. The latter are provided for the efficient
+manipulation
+of vectors or points in 2D or 3D space, and make heavy use of inlining
+for frequently-used operations. (One of the design goals of VL was to
+ensure
+that it was as fast as the C-language, macro-based libraries it was
+written
+to replace.)
+<p>Vectors and matrices can be composed of either floats or doubles;
+the
+element type is indicated by the suffix. It is possible to mix (for
+example)
+matrices of doubles with vectors of floats, as in the example above. It
+is also possible to instantiate VL for other other element types with
+their
+own suffixes (e.g., complex numbers).
+</p>
+<p>VL also contains classes for sparse vector/matrices,
+sub-vector/matrices,
+and implementations of some iterative solvers.
+</p>
+<p> VL is free for commercial and non-commercial use; see the LICENSE
+file for redistribution conditions. (These apply only to the source
+code; binaries may be freely redistributed, no strings attached.)
+</p>
+<p>VL requires C++. It is known to compile under g++, MSVC++ 5.0, Irix
+CC, and Metrowerks C++ (macintosh). The latest version can be retrieved
+from <a href="http://www.cs.cmu.edu/%7Eajw/public/dist/">http://www.cs.cmu.edu/~ajw/public/dist/</a>.
+This documentation can be found online at <a
+ href="http://www.cs.cmu.edu/%7Eajw/doc/vl.html">http://www.cs.cmu.edu/~ajw/doc/vl.html</a>.
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="classes"></a><b><font size="+3"><a
+ href="#index">Classes</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p>VL contains the following types and classes:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; Fixed-size:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vec2[fd]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2-vector<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vec3[fd]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3-vector<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vec4[fd]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4-vector<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mat2[fd]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 x 2 matrix<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mat3[fd]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 x 3 matrix<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mat4[fd]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4 x 4 matrix<br>&nbsp;&nbsp;&nbsp; Generic:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vec[fd]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; n-vector<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mat[fd]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; n x m matrix<br>&nbsp;&nbsp;&nbsp; Sparse:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SparseVec[fd]&nbsp;&nbsp; n-vector optimised for sparse storage<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SparseMat[fd]&nbsp;&nbsp; n x m matrix optimised for sparse storage<br>&nbsp;&nbsp;&nbsp; Sub:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SubVec[fd]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; n-vector which is a subset of another vector<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SubMat[fd]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; n x m matrix which is a subset of another matrix<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SubSVec[fd]&nbsp;&nbsp;&nbsp;&nbsp; the same for sparse vectors &amp; matrices<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SubSMat[fd]</pre>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="indexing"></a><b><font size="+3"><a
+ href="#index">Element
+Access</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+<p>The elements of a vector or matrix are accessed with standard C
+array
+notation:
+</p>
+<pre>&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp; v[2] = 4.0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // set element 2 of the vector<br>&nbsp;&nbsp;&nbsp; m[3][4] = 5.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // set row 3, column 4 of the matrix<br>&nbsp;&nbsp;&nbsp; m[2] = v;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // set row 2 of the matrix</pre>
+For the resizeable vector types, the current size can be obtained from
+the <i>Elts()</i> method for vectors, and the <i>Rows()</i> and <i>Cols()</i>
+methods for matrices. To iterate over all members of these types, you
+can
+use code of the form:
+<pre>&nbsp;&nbsp;&nbsp; for (i = 0; i &lt; v.Elts(); i++)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; v[i] = i;</pre>
+<pre>&nbsp;&nbsp;&nbsp; for (i = 0; i &lt; m.Rows(); i++)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (j = 0; j &lt; m.Cols(); j++)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m[i][j] = i + j;</pre>
+Though it seems slightly unintuitive, if you have a pointer to a vector
+or matrix, you must dereference it first before indexing it:
+<pre>&nbsp;&nbsp;&nbsp; (*vPtr)[20] = 3.0;</pre>
+If you need a pointer to the data belonging to a vector or matrix, use
+the Ref() method. (Matrices are stored by row.)
+<pre>&nbsp;&nbsp;&nbsp; Float *vecDataPtr = v.Ref(), *matDataPtr = m.Ref();</pre>
+<b><font color="#ff6666">Warning:</font></b> Any pointer to the data of
+a generic matrix or vector will become invalid as soon as it is
+resized.
+<p><b><font color="#ff6666">Note:</font></b> If you compile with
+-DVL_CHECKING,
+index range checks will be performed on all element accesses.
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="operators"></a><b><font size="+3"><a
+ href="#index">Arithmetic
+Operators and Functions</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<h3>Arithmetic Operators</h3>
+The following binary operators are defined for all vector and matrix
+classes,
+as long as both operands are of the same type.
+<pre>&nbsp;&nbsp;&nbsp; Basic arithmetic:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; + - * /<br>&nbsp;&nbsp;&nbsp; Accumulation arithmetic:&nbsp; += -= *= /=<br>&nbsp;&nbsp;&nbsp; Comparison:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ==, !=</pre>
+Vector multiplication and division is pairwise: (a * b)[i] = a[i] *
+b[i].
+(See below for how to form the dot product of two vectors with dot().)
+Matrix multiplication is defined as usual, and matrix division is
+undefined.
+<p>For both matrices and vectors, multiplication and division by a
+scalar
+is also allowed. Matrices can be multiplied either on the left or the
+right
+by a vector. In the expression m * v, v is treated as a column vector;
+in the expression v * m, it is treated as a row vector.
+</p>
+<h3>Vector Functions</h3>
+The following is a list of the various vector functions, together with
+a short description of what they return.
+<pre>&nbsp;&nbsp;&nbsp; Float&nbsp;&nbsp; dot(const Vec[fd] &amp;a, const Vecf &amp;b);&nbsp; // inner product of a and b<br>&nbsp;&nbsp;&nbsp; Float&nbsp;&nbsp; len(const Vecf &amp;v);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // length of v: || v ||<br>&nbsp;&nbsp;&nbsp; Float&nbsp;&nbsp; sqrlen(const VecNf &amp;v);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // length of v, squared<br>&nbsp;&nbsp;&nbsp; VecNf&nbsp;&nbsp; norm(const VecNf &amp;v);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // v / || v ||<br><br>&nbsp;&nbsp;&nbsp; Vec2f&nbsp;&nbsp; cross(const Vec2f &amp;a);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // vector orthogonal to a&nbsp;<br>&nbsp;&nbsp;&nbsp; Vec3f&nbsp;&nbsp; cross(const Vec3f &amp;a, const Vec3f &amp;b); // vector orthogonal to a and b<br>&nbsp;&nbsp;&nbsp; Vec4f&nbsp;&nbsp; cross(const Vec4f &amp;a, const Vec4f &amp;b, const Vec4f &amp;c);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // vector orthogonal to a, b and c<br><br>&nbsp;&nbsp;&nbsp; Vec2f&nbsp;&nbsp; proj(const Vec3f &amp;v);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // homog. projection: v[0..1] / v[2]<br>&nbsp;&nbsp;&nbsp; Vec3f&nbsp;&nbsp; proj(const Vec4f &amp;v);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // homog. projection: v[0..2] / v[3]</pre>
+In the above, VecN is either a Vec or a Vec[234], and all functions
+have
+corresponding Double/VecNd versions. For more on the use of the <i>proj()</i>
+operator, see <a href="#xforms">Transformations</a>.
+<h3>Matrix Functions</h3>
+The following functions can be used with matrices.
+<pre>&nbsp;&nbsp;&nbsp; MatNf&nbsp;&nbsp; trans(const MatNf &amp;m);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Transpose of m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp; Float&nbsp;&nbsp; trace(const MatNf &amp;m);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Trace of m<br>&nbsp;&nbsp;&nbsp; MatNf&nbsp;&nbsp; adj(const MatNf &amp;m);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Adjoint of m<br>&nbsp;&nbsp;&nbsp; Float&nbsp;&nbsp; det(const MatNf &amp;m);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Determinant of m<br>&nbsp;&nbsp;&nbsp; MatNf&nbsp;&nbsp; inv(const MatNf &amp;m);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Inverse of m, if it exists.</pre>
+Here MatN is any matrix type, though the <i>det()</i> and <i>adj()</i>
+functions are only defined for Mat[234][fd].
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="constants"></a><b><font size="+3"><a
+ href="#index">Constants</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+<p>There are a number of 'magic' constants in VL that can be used to
+initialise
+vectors or matrices with simple assignment statements. For example:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; Vec3f v; Mat3f m; Vecf v8(8);<br><br>&nbsp;&nbsp;&nbsp; v = vl_0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [0, 0, 0]<br>&nbsp;&nbsp;&nbsp; v = vl_y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [0, 1, 0]<br>&nbsp;&nbsp;&nbsp; v = vl_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [1, 1, 1]<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp; m = vl_0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 x 3 matrix, all elts. set to zero.<br>&nbsp;&nbsp;&nbsp; m = vl_1;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 x 3 identity matrix<br>&nbsp;&nbsp;&nbsp; m = vl_B;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 x 3 matrix, all elts. set to one.<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp; v8 = vl_axis(6);&nbsp;&nbsp;&nbsp; [0, 0, 0, 0, 0, 0, 1, 0]</pre>
+Below is a summary of the constants defined by VL.
+<pre>&nbsp;&nbsp;&nbsp; vl_one/vl_1/vl_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vector of all 1s, or identity matrix<br>&nbsp;&nbsp;&nbsp; vl_zero/vl_0/vl_Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vector or matrix of all 0s<br>&nbsp;&nbsp;&nbsp; vl_B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; matrix of all 1s<br>&nbsp;&nbsp;&nbsp; vl_x, vl_y, vl_z, vl_w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x, y, z and w axis vectors<br>&nbsp;&nbsp;&nbsp; vl_axis(n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; zero vector with element n set to 1<br>&nbsp;&nbsp;&nbsp; vl_pi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pi!<br>&nbsp;&nbsp;&nbsp; vl_halfPi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pi/2</pre>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="constructors"></a><b><font size="+3"><a
+ href="#index">Constructors</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+<p>In general, a vector or matrix constructor should be given either
+one
+of the initialiser constants listed above, or a list of values for its
+elements. If neither of these is supplied, the variable will be
+uninitialised.
+The first arguments to the constructor of a generic vector or matrix
+should
+always be the required size. Thus matrices and vectors are declared as
+follows:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; Vec[fd][234]&nbsp;&nbsp;&nbsp; v([initialisation_constant | element_list]);<br>&nbsp;&nbsp;&nbsp; Vec[fd]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; v([elements, [initialisation_constant | element_list]]);<br>&nbsp;&nbsp;&nbsp; Mat[fd][234]&nbsp;&nbsp;&nbsp; m([initialisation_constant | element_list]);<br>&nbsp;&nbsp;&nbsp; Mat[fd]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m([rows, columns, [initialisation_constant | element_list]]);</pre>
+If generic vectors or matrices are not given a size when first created,
+they are regarded as empty, with no associated storage. This state
+persists
+until they are assigned a matrix/vector or the result of some
+computation,
+at which point they take on the dimensions of that result.
+<p>Examples:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; Vec3f&nbsp;&nbsp;&nbsp; v(vl_1);<br>&nbsp;&nbsp;&nbsp; Vec3f&nbsp;&nbsp;&nbsp; v(1.0, 2.0, 3.0);<br>&nbsp;&nbsp;&nbsp; Vecf&nbsp;&nbsp;&nbsp;&nbsp; v(6, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0);&nbsp;<br>&nbsp;&nbsp;&nbsp; Vecf&nbsp;&nbsp;&nbsp;&nbsp; v(20, vl_axis(10));<br>&nbsp;&nbsp;&nbsp; Mat2f&nbsp;&nbsp;&nbsp; m(1.0, 2.0, 3.0, 4.0);<br>&nbsp;&nbsp;&nbsp; Matf&nbsp;&nbsp;&nbsp;&nbsp; m(10, 20, vl_I);</pre>
+<b><font color="#ff6666">Warning:</font></b> When initialising a
+generic
+vector or matrix with a list of elements, you must always ensure there
+is no possibility of the element being mistaken for an integer. (This
+is
+due to limitations of the stdarg package.) Make sure that each element
+value has either an exponent or a decimal point, i.e., use '2.0' rather
+than just '2'.
+<p>Finally, to set the size of a empty matrix or vector explicitly, or
+resize an existing matrix or vector, use the SetSize method:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; v.SetSize(23);<br>&nbsp;&nbsp;&nbsp; m.SetSize(10, 20);</pre>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="io"></a><b><font size="+3"><a href="#index">Input
+and
+Output</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+<p>All of the vector and matrix types in VL can be used in
+iostream-type
+expressions. For example:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; #include &lt;iostream.h&gt;<br>&nbsp;&nbsp;&nbsp; Vec3d v(vl_1);<br>&nbsp;&nbsp;&nbsp; cout &lt;&lt; v &lt;&lt; 2 * v &lt;&lt; endl;<br>&nbsp;&nbsp;&nbsp; cin &gt;&gt; v;</pre>
+will output
+<pre>&nbsp;&nbsp;&nbsp; [1 1 1][2 2 2]</pre>
+and then prompt for input. Vectors and matrices are parsed in the same
+format that they are output: vectors are delimited by square brackets,
+elements separated by white space, and matrices consist of a series of
+row vectors, again delimited by square brackets.
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="xforms"></a><b><font size="+3"><a
+ href="#index">Transformations</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+<p>The following are the transformations supported by VL.
+</p>
+<pre>&nbsp;&nbsp;&nbsp; Mat2f&nbsp;&nbsp; Rot2f(Double theta)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // rotate a 2d vector CCW by theta<br>&nbsp;&nbsp;&nbsp; Mat2f&nbsp;&nbsp; Scale2f(const Vec2f &amp;s)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // scale by s around the origin<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp; Mat3f&nbsp;&nbsp; HRot3f(Double theta)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // rotate a homogeneous 2d vector CCW by theta<br>&nbsp;&nbsp;&nbsp; Mat3f&nbsp;&nbsp; HScale3f(const Vec2f &amp;s)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // scale by s around the origin, in homogeneous 2d coords.<br>&nbsp;&nbsp;&nbsp; Mat3f&nbsp;&nbsp; HTrans3f(const Vec2f &amp;t)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // translate a homogeneous 2d vector by t<br><br>&nbsp;&nbsp;&nbsp; Mat3f&nbsp;&nbsp; Rot3f(const Vec3f &amp;axis, Double theta)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // rotate a 3d vector CCW around axis by theta<br>&nbsp;&nbsp;&nbsp; Mat3f&nbsp;&nbsp; Rot3f(const Vec4f &amp;q)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // rotate a 3d vector by the quaternion q<br>&nbsp;&nbsp;&nbsp; Mat3f&nbsp;&nbsp; Scale3f(const Vec3f &amp;s)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // scale by s around the origin<br><br>&nbsp;&nbsp;&nbsp; Mat4f&nbsp;&nbsp; HRot4f(const Vec3f &amp;axis, Double theta)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // rotate a homogeneous 3d vector CCW around axis by theta<br>&nbsp;&nbsp;&nbsp; Mat4f&nbsp;&nbsp; HRot4f(const Vec4f &amp;q)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // rotate a homogeneous 3d vector by the quaternion q<br>&nbsp;&nbsp;&nbsp; Mat4f&nbsp;&nbsp; HScale4f(const Vec3f &amp;s)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // scale by s around the origin, in homogeneous 3d coords<br>&nbsp;&nbsp;&nbsp; Mat4f&nbsp;&nbsp; HTrans4f(const Vec3f &amp;t)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // translate a homogeneous 3d vector by t</pre>
+All transformations have corresponding Double versions with a 'd'
+suffix.
+Transformations with a prefix of 'H' operate in the homogeneous
+coordinate
+system, which allows translation and shear transformations, as well as
+the usual rotation and scale. In this coordinate system an n-vector is
+embedded in a (n+1)-dimensional space, e.g., a homogeneous point in 2d
+is represented by a 3-vector.
+<p>To convert from non-homogeneous to homogeneous vectors, make the
+extra
+coordinate (usually 1) the second argument in a constructor of/cast to
+the next-higher dimension vector. To project from a homogeneous vector
+down to a non-homogeneous one (performing a homogeneous divide in the
+process),
+use the proj() function. This process can be simplified by the use of
+the
+xform() function, which applies a transform to a vector or composes two
+transformations, performing homogeneous/nonhomogeneous conversions as
+necessary.
+For example:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; Vec3d x,y;<br><br>&nbsp;&nbsp;&nbsp; // apply homogeneous transformations to a 3-vector, assuming column vectors&nbsp;<br>&nbsp;&nbsp;&nbsp; x = proj(Scale4d(...) * Trans4d(...) * Vec4d(y, 1.0));<br>&nbsp;&nbsp;&nbsp; // do the same thing with xform()<br>&nbsp;&nbsp;&nbsp; x = xform(xform(Scale4d(...), Trans4d(...)), y);</pre>
+By default, VL assumes that transformations should operate on column
+vectors
+(v = T * v), though it can be compiled <a href="#compiling">to assume
+row
+vectors</a> instead (v = v * T). Using the xform functions is a good
+way
+of isolating yourself from this assumption.
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="sparse"></a><b><font size="+3"><a
+ href="#index">Sparse
+Vectors and Matrices</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+<p>VL contains both a sparse vector type, which stores only the
+non-zero
+elements of the vector, and a sparse matrix type, whose rows are sparse
+vectors. Sparse vectors can be efficiently combined with other sparse
+vectors
+or normal vectors using the standard vector operations:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; SparseMatf sm;<br>&nbsp;&nbsp;&nbsp; SparseVecf sv1, sv2, sv3;<br>&nbsp;&nbsp;&nbsp; Vecf&nbsp; v;</pre>
+<pre>&nbsp;&nbsp;&nbsp; v = sm * v;<br>&nbsp;&nbsp;&nbsp; sm[0] += v;<br>&nbsp;&nbsp;&nbsp; sv1 = sv2 + sv3;</pre>
+<h3>
+<b>Initialisation</b></h3>
+Sparse vectors are typically initialised by giving a list of index,
+element
+pairs:
+<pre>&nbsp;&nbsp;&nbsp; SparseVecf sv;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // unsized sparse vector<br>&nbsp;&nbsp;&nbsp; SparseVecf sv(20);&nbsp; // zero vector of length 20.<br>&nbsp;&nbsp;&nbsp; SparseVecf sv(5, 1, 1.0, 4, 4.0, VL_SV_END);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // the vector [0.0, 1.0, 0.0, 0.0 4.0]</pre>
+The <a href="vl.html#constructors">standard vector initialisers</a>
+can
+also be used.
+<br>
+&nbsp;
+<h3><b>Manipulation</b></h3>
+Once you have your sparse vector, it can be changed in the following
+ways:
+<p><font color="#ff6666">*</font>&nbsp;&nbsp;&nbsp; Re-initialise with
+the <i>SetElts()</i> method:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; sv.SetSize(5);<br>&nbsp;&nbsp;&nbsp; sv.SetElts(1, 1.0, 4, 4.0, VL_SV_END);<br>&nbsp;&nbsp;&nbsp; // sets sv to [0.0, 1.0, 0.0, 0.0 4.0]</pre>
+<p><br>
+<font color="#ff6666">*</font>&nbsp;&nbsp;&nbsp; Use the <i>SVIter[fd]</i>
+iterator, which lets you iterate over the elements of a sparse vector,
+and access them using the methods:
+</p>
+<blockquote>j.Data() : returns the current element's data
+  <br>
+j.Index() : returns the current element's index</blockquote>
+<b><font color="#ff6666">Note:</font></b>&nbsp; It is highly
+recommended
+that you use the <i>SVIter[fd]</i> class to manipulate sparse vectors,
+as it is written to be as efficient as possible, even performing a
+binary
+search for elements when necessary. The iterator class can be used in a
+number of ways:
+<blockquote><font color="#ff6666">*</font><font color="#ff0000"> </font>Use
+  <i>Begin()</i>,
+  <i>Inc()</i>,
+  <i>AtEnd()</i>
+to iterate over the non-zero elements of the vector:
+  <pre>&nbsp;&nbsp;&nbsp; SVIterf j;<br>&nbsp;&nbsp;&nbsp; // sv = sv * 2<br>&nbsp;&nbsp;&nbsp; for (j.Begin(sv); !j.AtEnd(); j.Inc())<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; j.Data() *= 2.0;</pre>
+  <font color="#ff6666">*</font><font color="#ff0000">&nbsp;&nbsp; </font>Use
+one of the following methods:
+  <pre>&nbsp; Inc(Int i)&nbsp;&nbsp;&nbsp; moves on to elt i, where i will increase by 1 on each call<br>&nbsp; IncTo(Int i)&nbsp; moves on to elt i, where i will increase monotonically</pre>
+within another for-loop to access the elements of the sparse vector
+corresponding
+to i. For example:
+  <pre>&nbsp;&nbsp;&nbsp; // v = v + sv<br>&nbsp;&nbsp;&nbsp; for (j.Begin(sv), i = 0; i &lt; v.NumItems(); i++)<br>&nbsp;&nbsp;&nbsp; {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; j.Inc(i);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; v[i] += j.Data();</pre>
+  <pre>&nbsp;&nbsp;&nbsp; }<br><br>&nbsp;&nbsp;&nbsp; // a += dot(sv1, sv2)<br>&nbsp;&nbsp;&nbsp; for (j.Begin(sv2), k.Begin(sv1); !k.AtEnd(); k.Inc())<br>&nbsp;&nbsp;&nbsp; {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; j.IncTo(k.Index());&nbsp; // find corresponding elt in sv2<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (j.Exists())<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a += j.Data() * k.Data();<br>&nbsp;&nbsp;&nbsp; }</pre>
+</blockquote>
+<font color="#ff6666">*</font><font color="#ff0000">&nbsp;&nbsp; </font>Use
+the <i>Overlay()</i> method: a.Overlay(b) performs a[i] = b[i] for all
+non-zero b[i].
+<p><font color="#ff6666">*</font><font color="#ff0000">&nbsp;</font>&nbsp;&nbsp;
+Direct access: <i>Begin(),AddElt()</i> or
+<i>AddNZElt()</i> new element
+pairs in order, then call
+<i>End()</i>. (Use
+<i>AddNZElt()</i> if you know
+for certain the added element will be non-zero.) For example:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; // set sv to [0.0, 1.0, 0.0, 0.0 4.0]<br>&nbsp;&nbsp;&nbsp; sv.NumElts(5);<br>&nbsp;&nbsp;&nbsp; sv.Begin();<br>&nbsp;&nbsp;&nbsp; sv.AddNZElt(1, 1.0);<br>&nbsp;&nbsp;&nbsp; sv.AddNZElt(4, 4.0);<br>&nbsp;&nbsp;&nbsp; sv.End();</pre>
+<font color="#ff6666">*</font><font color="#ff0000">&nbsp;&nbsp; </font>As
+a last resort, use the <i>Get()</i> and <i>Set()</i> methods. These
+calls
+are not efficient for multiple accesses, but will at least perform a
+binary
+search to locate the requested element quickly.
+<pre>&nbsp;&nbsp;&nbsp; sv1.Set(10, sv2.Get(20)); // sv1[10] = sv2[20]</pre>
+<b><font color="#ff6666">Note:</font></b>&nbsp; The best way to write
+code
+for sparse vectors and matrices is to use the <i>SVIter[fd]</i> class,
+and recast code to use the efficient vector operations where possible.
+<br>
+&nbsp;
+<h3><b>Sparse Fuzziness</b></h3>
+The SparseVec class has a tolerance level for elements to be considered
+zero, referred to as the fuzz. (If |x| &lt; fuzz, it is treated as
+zero.)
+This can be set with the method <i>SparseVec[fd]::SetFuzz(fuzz)</i>.
+The
+default value of fuzz is 1e-10.
+<p>A convenient way to test if an element is zero according to the
+current
+fuzz setting is to use the <i>SparseVec[fd]::IsNonZero(elt)</i>
+method.
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="sub"></a><b><font size="+3"><a
+ href="#index">Sub Vectors</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p>VL provides the following functions for accessing subregions of
+vectors
+and matrices:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; Vec[fd]&nbsp;&nbsp;&nbsp;&nbsp; sub(const Vec[fd] &amp;v, Int start, Int length);&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp; Vec[fd]&nbsp;&nbsp;&nbsp;&nbsp; first(const Vec[fd] &amp;v, Int length);&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp; Vec[fd]&nbsp;&nbsp;&nbsp;&nbsp; last(const Vec[fd] &amp;v, Int length);</pre>
+<pre>&nbsp;&nbsp;&nbsp; SubMat[fd]&nbsp; sub(const Mat[fd] &amp;m, Int top, Int left, Int height, Int width = 1);<br>&nbsp;&nbsp;&nbsp; SubMat[fd]&nbsp; sub(const Mat[fd] &amp;m, Int rows, Int cols);<br>&nbsp;&nbsp;&nbsp; SubVec[fd]&nbsp; col(const Mat[fd] &amp;m, Int i);<br>&nbsp;&nbsp;&nbsp; SubVec[fd]&nbsp; row(const Mat[fd] &amp;m, Int i);<br>&nbsp;&nbsp;&nbsp; SubVec[fd]&nbsp; diag(const Mat[fd] &amp;m, Int diagNum);</pre>
+<p><br>
+The utility of these functions is best illustrated with some examples:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; u = sub(v, 2, 4);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // return the 4 elements of v starting at element 2.<br>&nbsp;&nbsp;&nbsp; u = first(v, 2);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // return the first 2 elements of v.<br>&nbsp;&nbsp;&nbsp; u = last(v, 2);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // return the last 2 elements of v.<br><br>&nbsp;&nbsp;&nbsp; v = m[i];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // extract row i of m<br>&nbsp;&nbsp;&nbsp; v = col(m, i);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // extract column i of m<br>&nbsp;&nbsp;&nbsp; v = row(m, i);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // extract row i of m<br><br>&nbsp;&nbsp;&nbsp; v = diag(m);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // extract main diagonal of m<br>&nbsp;&nbsp;&nbsp; v = diag(m, i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // extract diagonal starting on column i<br>&nbsp;&nbsp;&nbsp; v = diag(m, -i)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // extract diagonal starting on row i<br><br>&nbsp;&nbsp;&nbsp; n = sub(m, 2, 3);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // returns the upper-left 2 rows and three columns of m.<br>&nbsp;&nbsp;&nbsp; n = sub(m, i, j, 2, 3);&nbsp;&nbsp; // returns the 2 rows and 3 columns of m starting at<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // row i, column j.</pre>
+<b><font color="#ff6666">Warning:</font></b> remember that indexing is
+0-based in VL, so row 2 above refers to the third row from the top of
+the
+matrix, and so on.
+<p>The subvector and submatrix types returned by the <i>sub()</i>, <i>col()</i>
+and diag() functions can, in addition to being assigned to normal
+vectors
+as above, also be assigned to:
+<br>
+&nbsp;
+</p>
+<pre>&nbsp;&nbsp;&nbsp; diag(m) = diag(m) * 2.0;&nbsp;&nbsp;&nbsp;&nbsp; // multiply diagonal elements of m by 2<br>&nbsp;&nbsp;&nbsp; sub(m, 2, 2) = sub(m, 2, 2) + Matf(2, 2, vl_1);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // add 1 to each of the upper-left 2 x 2<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // elements of m.</pre>
+<b><font color="#ff6666">Warning: </font></b>The standard in-place
+operations
+are not defined on submatrix regions, so the following will <b>not</b>
+work:
+<pre>&nbsp;&nbsp;&nbsp; diag(m) *= 2.0;<br>&nbsp;&nbsp;&nbsp; sub(m, 2, 2) += Matf(2, 2, vl_1);</pre>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="solvers"></a><b><font size="+3"><a
+ href="#index">Solving
+Systems of Linear Equations</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+<p>VL comes with a number of <b>solvers</b>, which are routines for
+finding
+the solution of the linear system of equations <b><font color="#666666">Ax
+= b</font></b>. Currently these include <i>SolveOverRelax()</i>, which
+uses the overrelaxation form of Gauss-Seidel iteration, and <i>SolveConjGrad()</i>,
+which uses the conjugate gradient algorithm. Conjugate gradient is
+asymptotically
+faster than Gauss-Seidel, but it assumes that A is both positive
+definite
+and symmetric. If A is not symmetric, the routine instead solves the
+system
+<font color="#666666"><b>0.5(A
++ A</b><sup>T</sup><b>)x = b</b></font>.
+</p>
+<p>The solvers are defined as follows:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; Double SolveOverRelax(const [Sparse]Matd &amp;A, Vec[fd] &amp;x, const Vec[fd] &amp;b,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Double epsilon, Double omega = 1.0, Int *steps = 0);</pre>
+<pre>&nbsp;&nbsp;&nbsp; Double SolveConjGrad(const [Sparse]Matd &amp;A, Vec[fd] &amp;x, const Vec[fd] &amp;b,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Double epsilon, Int *steps = 0);</pre>
+<h3>
+Parameters</h3>
+Each iteration of a solver modifies the current approximate solution<i>
+x</i>. You must set x to an initial guess before first calling the
+solver
+routine; a good starting value is often just <i>b</i>.
+<p>The solvers return the squared residual of the linear system, <b><font
+ color="#666666">||Ax
+- b||<sup>2</sup></font></b>, which is a measure of the error in the
+solution.
+</p>
+<p>The <i>epsilon</i> parameter controls the accuracy of the solution:
+the solver will return as soon as its estimate of the squared residual
+drops below epsilon.
+</p>
+<p>For <i>SolveOverRelax</i>, <i>omega</i> controls the amount of
+overrelaxation.
+A value of one gives pure Gauss-Seidel iteration. Values higher than
+that
+cause the solver to overshoot towards the estimated solution on each
+iteration.
+If the system is smooth and well behaved, this can lead to faster
+convergence
+times. Generally, setting omega somewhere between 1 and 2 results in
+the
+fastest convergence rate, but the exact value is system-specific.
+</p>
+<p>If you want, you can supply a maximum number of iterations to
+perform
+via <i>steps</i>. In this case, the routines will set the actual
+number
+of interations performed when they return. This can be useful if you
+wish
+to interleave steps of the solver with some other activity.
+</p>
+<h3>Examples</h3>
+<pre>&nbsp;&nbsp;&nbsp; // solve Ax = b from an initial guess of x = b<br>&nbsp;&nbsp;&nbsp; x = b;<br>&nbsp;&nbsp;&nbsp; SolveOverRelax(A, x, b, 1e-6);</pre>
+<pre>&nbsp;&nbsp;&nbsp; // perform one iteration of the conjugate gradient solver<br>&nbsp;&nbsp;&nbsp; Int steps = 1;<br>&nbsp;&nbsp;&nbsp; error = SolveConjGrad(A, x, b, 0, &amp;steps);</pre>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="factor"></a><b><font size="+3"><a
+ href="#index">Factoring
+Matrices</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+<p>VL contains two routines for <b>factoring</b> matrices; the
+QR-factorization,
+and the SVD (singular value decomposition). The former factors any
+given
+matrix A into two matrices Q and R, such that <b><font color="#666666">A
+= QR</font></b>. The Q matrix is orthogonal, and the R matrix is
+upper-triangular.
+</p>
+<p>The SVD decomposes an m x n matrix A into three matrices, <font
+ color="#666666"><b>A
+= UDV</b><sup>T</sup></font>, where:
+</p>
+<ul>
+  <li>
+    <b><font color="#666666">U</font></b> is m x n, and orthogonal.</li>
+  <li>
+    <b><font color="#666666">D</font></b> is n x n, and is diagonal and
+positive
+semi-definite; its elements are the square roots of the eigenvalues of
+    <font color="#666666"><b>A</b><sup>T</sup><b>A</b></font>.</li>
+  <li>
+    <b><font color="#666666">V</font></b> is n x n, and orthogonal.</li>
+</ul>
+The SVD has the following interesting properties:
+<ul>
+  <li>
+The SVD says that we can view any matrix transformation as: rotate the
+vector from source space, scale about the axes, and rotate the vector
+again
+into the destination space.</li>
+  <li>
+&nbsp;The matrix's <i>condition number</i> is ratio of the largest
+entry
+of D to the smallest.</li>
+  <li>
+U and V<sup>T</sup> are column-orthonormal.</li>
+  <li>
+&nbsp;The smallest least squares solution of <b><font color="#666666">Ax
+= b</font></b> is <font color="#666666"><b>x = V F U</b><sup>T</sup><b>
+b</b></font>, where <font color="#666666"><b>F = D</b><sup>-1</sup></font>,
+but with zero entries on the diagonal of D kept as zero rather than
+replaced
+with their inverse.</li>
+</ul>
+The factoring routines are defined as follows:
+<pre>&nbsp;&nbsp;&nbsp; #include "Factor.h"</pre>
+<pre>&nbsp;&nbsp;&nbsp; Void QRFactorization(Matd &amp;A, Matd &amp;Q, Matd &amp;R);<br>&nbsp;&nbsp;&nbsp; Void SVDFactorization(Matd &amp;A, Matd &amp;U, Matd &amp;V, Vecd &amp;diagonal);</pre>
+Both routines destroy the input matrix, A. Currently, it is required
+that
+A have the same or more rows than columns. If your matrix has more
+columns
+than rows, add enough zero rows to the bottom of it to make it square.
+<br>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="compiling"></a><b><font size="+3"><a
+ href="#index">Compiling
+with VL</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+<h3>
+Headers</h3>
+For basic use, the only header file needed is VL.h.
+<h3>Linking</h3>
+For your final build, link with -lvl (libvl.a). To use the debugging
+version
+of VL, which has assertions and range checking turned on, use -lvl.dbg
+(libvl.dbg.a), and add -DVL_CHECKING to your compile flags. This
+debugging
+version includes checks for correct matrix and vector sizes during
+arithmetic
+operations.
+<h3>Compile options</h3>
+VL uses the following compile-time options:
+<pre>&nbsp;&nbsp;&nbsp; VL_CHECKING&nbsp;&nbsp;&nbsp;&nbsp; - turn on index checking and assertions<br>&nbsp;&nbsp;&nbsp; VL_ROW_ORIENT&nbsp;&nbsp; - transformations operate on row vectors instead of column vectors</pre>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="opengl"></a><b><font size="+3"><a
+ href="#index">Using
+VL With OpenGL</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+<p>VL comes with a header file, VLgl.h, which makes using VL vectors
+with
+OpenGL more convenient. For example:
+</p>
+<pre>&nbsp;&nbsp;&nbsp; #include "VLgl.h"<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp; Vec3f x(24, 0, 100), y(40, 20, 10);<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp; glBegin(GL_LINES);<br>&nbsp;&nbsp;&nbsp; glVertex(x);&nbsp;<br>&nbsp;&nbsp;&nbsp; glVertex(y);<br>&nbsp;&nbsp;&nbsp; glEnd();</pre>
+&nbsp;
+<table nosave="" bgcolor="#ffcc00" border="0" cols="1" width="100%">
+  <tbody>
+    <tr nosave="" valign="CENTER">
+      <td nosave=""><a name="author"></a><b><font size="+3"><a
+ href="#index">Author</a></font></b></td>
+    </tr>
+  </tbody>
+</table>
+<p>Please forward bug reports, comments, or suggestions to:
+</p>
+<address>Andrew Willmott (<a href="mailto:ajw+vl@cs.cmu.edu">awillmott+vl@gmail.com</a>),
+Graphics Group, SCS, CMU.</address>
+</body>
+</html>

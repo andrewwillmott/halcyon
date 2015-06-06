@@ -1,0 +1,34 @@
+// Shared log settings for all apps
+{
+    groups:
+    {
+        default:
+        {
+            active: true,       // Whether to ignore these messages
+            logger: true,       // Log to NSLogger
+            logLevel: 2,        // NSLogger log level
+            debugger: false     // Log to debugger
+        },
+        // GL: { active: false },
+        Audio_Error:    { logLevel: 0, debugger: true },
+        Config_Error:   { logLevel: 0, debugger: true },
+        Effects_Error:  { logLevel: 0, debugger: true },
+        GL_Error:       { logLevel: 0, debugger: true },
+        ReadLXO_Error:  { logLevel: 0, debugger: true },
+        Renderer_Error: { logLevel: 0, debugger: true },
+
+        Audio_Debug:    { logLevel: 3 },
+        Config_Debug:   { logLevel: 3 },
+        Effects_Debug:  { logLevel: 3 },
+        GL_Debug:       { logLevel: 3 },
+        ReadLXO_Debug:  { logLevel: 3 },
+        Renderer_Debug: { logLevel: 3 },
+        FileWatch_Debug: { logLevel: 3 },
+    },
+
+    // bonjour: Tungsten
+    // host: "tungsten.local."
+
+    // Prefer a local TCP connection
+    host: "localhost"
+}

@@ -1,0 +1,10 @@
+SCRIPTS="$(dirname $0)"
+BUILD_SERVER=10.0.88.2
+BUILD_LOCAL=${SCRIPTS}/../BuildServer
+
+chmod go-rwx ${SCRIPTS}/build_key_rsa
+
+rsync -e "ssh -o IdentityFile=${SCRIPTS}/build_key_rsa" \
+    -avzu \
+    build@${BUILD_SERVER}:/volume1/Radiator/Builds/ --exclude "Archive/*" --exclude @eaDir \
+    ${BUILD_LOCAL}/

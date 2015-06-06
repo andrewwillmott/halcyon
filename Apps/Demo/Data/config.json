@@ -1,0 +1,54 @@
+// Master config file for Demo
+
+{
+    import:
+    [
+        { file: "Shared/log.json", to: log },
+
+        { file: "Shared/Materials/materials.json",  to: materials },
+        { file: "Shared/testEffects.json",  to: effects, notConfig: Release },
+        { file: "Shared/Textures/textures.json",  to: materials },
+    ],
+
+    log:
+    {
+	    // bonjour: Tungsten
+	    // host: "tungsten.local."
+    },
+
+    timeScale: 1.0,
+    vsync: 1,
+
+    camera:
+    {
+        pitch: 35,
+        heading: 225,
+        relativeDistance: 4
+    },
+
+    render:
+    {
+        flags:
+        {
+            debug: 0
+        },
+
+        layers:
+        {
+            main:
+            {
+                commands:
+                [
+                    { camera: main },
+                    { frameBuffer: default },
+                    { clear: [0.5, 0.4, 0.5, 0] },
+                    { drawLayer: background   },
+                    { drawLayer: models },
+                    { drawLayer: particles },
+                    { drawLayer: debugDraw },
+                    { drawLayer: screens },
+                ]
+            },
+    	}
+    },
+}

@@ -1,0 +1,40 @@
+TODO
+
+
+DONE
+- Switched to STL
+- CL prefix
+
+
+CHANGES
+		
+1.0.2
+	fixed SByte typo
+	added Short
+	fixed EltArray bug: calling memcpy with item = 0	
+
+1.0.1
+	Applied fix from max for DblList nukes
+	Fix from dushyanth to make env handling better
+		
+	Would you believe the C++ "standard" has changed so that new no longer
+	returns 0 on out of memory? It now throws an exception. Jeez, Bjarne,
+	what happened to all that "no overhead for language features you don't
+	use" crap? 
+	Nuked all asserts on new returning zero.
+
+	fixed bugs in Array code: need to compare copied arrays to items, not
+	allocated, as allocated can be zero if the array doesn't own its data.
+		
+	added String().Printf()
+	added FindFileExtension to FileName
+
+	fixed bug in Array::Replace which caused problems when the source
+	array was subsequently resized.
+	added Array::Append for arrays. (never needed this before!)
+
+	added NArray so we're not always re-instantiating code for each new
+	type of array. (Long overdue!) Still use Array code for basic types.
+
+	added Heap code for priority queue stuff.
+	added cycle counter for pentiums

@@ -1,0 +1,329 @@
+// Master config file for Viewer
+
+{
+    import:
+    [
+        { file: "Shared/log.json", to: log },
+
+        { file: "Shared/Materials/materials.json",  to: materials },
+        { file: "Shared/testEffects.json",  to: effects, notConfig: Release },
+        { file: "Shared/Textures/textures.json", to: textures, notConfig: Release },
+        // { file: "testImportA.json", to: test },
+        // { file: "testImportB.json", to: test, platform: iOS },
+    ],
+
+    log:
+    {
+        groups:
+        {
+            Effects:  { logLevel: 1, debugger: true },
+        }
+	    // bonjour: Tungsten
+	    // host: "tungsten.local."
+    },
+
+    timeScale: 1.0,
+    vsync: 2,   // 30 FPS
+
+    clipPlanesOffset: 0.0,
+
+    serverName: ViewerData,
+    serverName: 8088,
+
+    camera:
+    {
+        pitch: 35,
+        heading: 45,
+        relativeDistance: 200
+    },
+
+    viewer:
+    {
+        // Things to load up in the viewer by default
+        models:
+        [
+            {
+                id: demon,
+                transform: { scale: 0.2, translation: [-50, 50, 40] },
+                rotationSpeed: 0.25,
+                active: true
+            },
+            {
+                id: tree,
+                transform: { scale: 10, translation: [50, 50, 0] },
+                active: true
+            },
+            {
+                id: axes,
+                transform: { scale: 50, translation: [50, -50, 0] },
+                active: true
+            },
+            {
+                id: teapot,
+                transform: { scale: 10, pitch: 90, heading: 135, translation: [-50, -50, 0] },
+                active: false
+            },
+            {
+                id: comet,
+                transform: { scale: 50, axis: [0, 1, 0], theta: -1.4},
+                rotationSpeed: -0.05,
+                active: false
+            },
+        ],
+
+        effects:
+        [
+            {
+                effect: viewerTest,
+                effectTransform: { translation: [-50, -50, 0], scale: 15 },
+                active: true
+            },
+            {
+                effect: shakeAndBakeTest,
+                active: true
+            },
+            {
+                effect: spriteLayerTest,
+                effectTransform: { scale: 15 },
+                active: false
+            }
+        ],
+    },
+
+    effects:
+    {
+        groups:
+        {
+            viewerTest:
+            {
+                effects:
+                [
+                    {
+                        id: particles.test,
+                        transform: { scale: 0.9 },  // vary for scaleParticles test
+                    },
+                    {
+                        id: particles.injectTest,
+                        transform: { pitch: 10, translation: [3, -2, 0] },
+                    },
+                    {
+                        id: particles.emitTest,
+                        transform: { scale: 0.9 },  // vary for scaleParticles test
+                    },
+                    {
+                        id: particles.tilesTest,
+                        transform: { pitch: 45, translation: [3, -2, 0] },
+                    },
+                    {
+                        id: sprite.spriteTest,
+                        transform: { translation: [-3, 2, 0] }
+                    }
+                ]
+            },
+
+            shakeAndBakeTest:
+            {
+                effects:
+                [
+                    { type: shake, id: shakeTest },
+                    { type: screen, id: screenTest }
+                ]
+            },
+        },
+
+        particles:
+        {
+            test2:
+            {
+                // Creation
+
+                emitSource:
+                {
+                    type: square,          // point, square, rect, cube, box, circle, sphere, ellipse, ellipsoid, ring, torus
+                    size: 0.3,         // for anything except point
+                    // width: 0.1,         // for ring/torus
+                    offset: [0, 0, 0]
+                },
+
+                emitDir: [0, 0, 1],
+                emitSpread: 0.1,
+                emitSpeed: [4, 4],
+
+                align: cameraPos,
+
+                life: 5,
+                rate: [200, 0, 0, 50],
+                cycleTime: 4,
+                cycleCount: 0,
+
+                // Physics
+                gravity: 2,
+                drag: 0.01,
+
+                // Animation
+                colour: [ [1, 1, 0], [0, 1, 1] ],
+                alpha: [ 1, 1, 1, 1, 0 ],
+                size: [0.1, 0.2, 0.1],
+
+                stretch: 0.5,
+
+                texture: particleGrid,
+
+                controller: bounce
+            },
+        },
+
+        sprites:
+        {
+        },
+
+        shakes:
+        {
+        },
+
+        screens:
+        {
+        }
+    },
+
+    models:
+    {
+        demon:
+        {
+            lod0: "models/demon.model",
+            material: model,
+            bounds: [-170, -100, -200,  170, 100, 200]
+        },
+        tree:
+        {
+            lod0: "models/plant1.lxo",
+            material: model,
+            bounds: [-8, -8, 0,  8, 8, 15]
+        },
+        teapot:
+        {
+            lod0: "models/teapot.obj",
+            material: modelSolid,
+            scale: 1.0
+        },
+        axes:
+        {
+            lod0: "models/axes.lxo",
+            material: model,
+            heading: 180,
+            scale: 1.0
+        },
+
+        sphere:
+        {
+            lod0: "models/local/sphere.obj",
+            material: modelUntextured,
+            boundingRadius: 1
+        },
+        bunny:
+        {
+            lod0: "models/local/bunny.obj",
+            material: modelUntextured,
+            scale: 0.5
+        },
+        comet:
+        {
+            lod0: "models/local/comet.obj",
+            material: modelUntextured,
+            scale: 1.0
+        },
+    },
+
+    render:
+    {
+        flags:
+        {
+            drawStamp: 0
+        },
+
+        renderBuffers:
+        {
+            particlesBuffer:
+            {
+                format: rgba8,
+                fraction: 0.125
+            },
+            depthBuffer256:
+            {
+                format: depth16,
+                fraction: 0.125
+            }
+        },
+
+        frameBuffers:
+        {
+            particlesFrameBuffer:
+            {
+                colour0: particlesBuffer,
+
+                clear: [1, 0.5, 0, 0.5],
+                depth: false
+            }
+        },
+
+        layers:
+        {
+            main:
+            {
+                commands:
+                [
+                    // Demo rendering particles to offscreen buffer
+                    { camera: main },
+                    { frameBuffer: particlesFrameBuffer },
+                    { clear: [1.0, 0.9, 0.8, 1], depth: false },
+                    { drawLayer: particles },
+
+                    // Main frame render
+                    { frameBuffer: default },
+                    { clear: [0.5, 0.4, 0.5, 0] },
+                    { drawLayer: background   },
+                    { drawLayer: models },
+                    { drawLayer: sprites },
+                    { drawLayer: particles },
+                    { drawLayer: debugDraw },
+                    { drawLayer: screens },
+                    { drawLayer: drawStamp, flags: { drawStamp: true } }
+                ]
+            },
+
+            drawStamp:
+            {
+                // When enabled, draws the demo buffer in the upper right
+                commands:
+                [
+                    { material: texture2D },
+                    { texture: particlesBuffer },
+                    { drawRect: [0.75, 0.75, 0.95, 0.95], flipX: 0, flipY: 0 },
+                    { discard: colour0 }
+                ]
+            }
+    	}
+    },
+
+    shaderData:
+    {
+        effectParam1: { type: vec4, value: 1 },
+        effectParam2: { type: vec4, value: 0 },
+        effectParam3: { type: vec4, value: 0 },
+        effectParam4: { type: vec4, value: 0 }
+    },
+
+    materials:
+    {
+        particlesParamTest:
+        {
+            fragmentShader: "effectParamTest",
+            vertexShader: "Shared/Materials/colourUV3D",
+
+            cullMode: none,
+            blend: [add, sourceAlpha, invSourceAlpha],
+            depthCompare: always,
+            depthWrite: false
+        },
+    },
+}

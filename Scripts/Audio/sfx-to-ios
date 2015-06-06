@@ -1,0 +1,1 @@
+afconvert -f caff -d LEI16@22050 "$1"

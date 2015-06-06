@@ -1,0 +1,767 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7923F48F18ECA70000CDDCDF /* back_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7923F48618ECA70000CDDCDF /* back_icon.png */; };
+		7923F49018ECA70000CDDCDF /* back_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7923F48718ECA70000CDDCDF /* back_icon@2x.png */; };
+		7923F49118ECA70000CDDCDF /* forward_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7923F48818ECA70000CDDCDF /* forward_icon.png */; };
+		7923F49218ECA70000CDDCDF /* forward_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7923F48918ECA70000CDDCDF /* forward_icon@2x.png */; };
+		7923F49318ECA70000CDDCDF /* HalcyonLaunch-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7923F48A18ECA70000CDDCDF /* HalcyonLaunch-Landscape~ipad.png */; };
+		7923F49418ECA70000CDDCDF /* HalcyonLaunch-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7923F48B18ECA70000CDDCDF /* HalcyonLaunch-Portrait~ipad.png */; };
+		7923F49518ECA70000CDDCDF /* HalcyonLaunch.png in Resources */ = {isa = PBXBuildFile; fileRef = 7923F48C18ECA70000CDDCDF /* HalcyonLaunch.png */; };
+		7923F49618ECA70000CDDCDF /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7923F48D18ECA70000CDDCDF /* icon.png */; };
+		7923F49718ECA70000CDDCDF /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7923F48E18ECA70000CDDCDF /* icon@2x.png */; };
+		7923F4A018ECA70E00CDDCDF /* Halcyon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 7923F49D18ECA70E00CDDCDF /* Halcyon.iconset */; };
+		7923F4A118ECA70E00CDDCDF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7923F49E18ECA70E00CDDCDF /* InfoPlist.strings */; };
+		7923F4A218ECA70E00CDDCDF /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7923F49F18ECA70E00CDDCDF /* MainMenu.xib */; };
+		7938424C175767AC0061D76D /* SoundApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C0A0AC16B927CA00B83139 /* SoundApp.cpp */; };
+		793842641757682E0061D76D /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C0A08216B9237800B83139 /* MainWindow-iPad.xib */; };
+		793842651757682E0061D76D /* MainWindow-iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C0A08316B9237800B83139 /* MainWindow-iPhone.xib */; };
+		79C0A0F516B92EE500B83139 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79C0A08516B9237800B83139 /* InfoPlist.strings */; };
+		79C0A0F616B92EE500B83139 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C0A08616B9237800B83139 /* MainMenu.xib */; };
+		79C0A0F716B92F5B00B83139 /* SoundApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 79C0A0AC16B927CA00B83139 /* SoundApp.cpp */; };
+		79FDF35318C772890006B6A1 /* libHalcyon_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AAFC4518C0F51100C88D54 /* libHalcyon_iOS.a */; };
+		79FDF35618C772940006B6A1 /* libHalcyon_OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AAFC4718C0F51100C88D54 /* libHalcyon_OSX.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7923F49A18ECA70400CDDCDF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 790BFB5D1726B88C0045E9A8 /* Halcyon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 79493FE518E96B9400A78281;
+			remoteInfo = cooker;
+		};
+		79AAFC4418C0F51100C88D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 790BFB5D1726B88C0045E9A8 /* Halcyon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 79C09FCE16B91B4F00B83139;
+			remoteInfo = Halcyon_iOS;
+		};
+		79AAFC4618C0F51100C88D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 790BFB5D1726B88C0045E9A8 /* Halcyon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 79C09FC216B91B3700B83139;
+			remoteInfo = Halcyon_OSX;
+		};
+		79AAFC4818C0F51100C88D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 790BFB5D1726B88C0045E9A8 /* Halcyon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 79FBB32F1781B1FC0084AEE5;
+			remoteInfo = EventBroadcaster;
+		};
+		79FDF34E18C772830006B6A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 790BFB5D1726B88C0045E9A8 /* Halcyon.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 79C09FCD16B91B4F00B83139;
+			remoteInfo = Halcyon_iOS;
+		};
+		79FDF35418C7728F0006B6A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 790BFB5D1726B88C0045E9A8 /* Halcyon.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 79C09FC116B91B3700B83139;
+			remoteInfo = Halcyon_OSX;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		790BFB5D1726B88C0045E9A8 /* Halcyon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Halcyon.xcodeproj; path = ../../Shared/HL/Halcyon.xcodeproj; sourceTree = "<group>"; };
+		7923F48618ECA70000CDDCDF /* back_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_icon.png; sourceTree = "<group>"; };
+		7923F48718ECA70000CDDCDF /* back_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_icon@2x.png"; sourceTree = "<group>"; };
+		7923F48818ECA70000CDDCDF /* forward_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward_icon.png; sourceTree = "<group>"; };
+		7923F48918ECA70000CDDCDF /* forward_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forward_icon@2x.png"; sourceTree = "<group>"; };
+		7923F48A18ECA70000CDDCDF /* HalcyonLaunch-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HalcyonLaunch-Landscape~ipad.png"; sourceTree = "<group>"; };
+		7923F48B18ECA70000CDDCDF /* HalcyonLaunch-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HalcyonLaunch-Portrait~ipad.png"; sourceTree = "<group>"; };
+		7923F48C18ECA70000CDDCDF /* HalcyonLaunch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HalcyonLaunch.png; sourceTree = "<group>"; };
+		7923F48D18ECA70000CDDCDF /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		7923F48E18ECA70000CDDCDF /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		7923F49D18ECA70E00CDDCDF /* Halcyon.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = Halcyon.iconset; sourceTree = "<group>"; };
+		7923F49E18ECA70E00CDDCDF /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		7923F49F18ECA70E00CDDCDF /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		79384260175767AC0061D76D /* Sound_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sound_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7938427117576A8C0061D76D /* Develop-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Develop-iOS.xcconfig"; sourceTree = "<group>"; };
+		7938427217576A8C0061D76D /* Develop-OSX.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Develop-OSX.xcconfig"; sourceTree = "<group>"; };
+		794CC8F818EF29610077ACBC /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		794CC8FA18EF29610077ACBC /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		794CC8FB18EF29610077ACBC /* log.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = log.json; sourceTree = "<group>"; };
+		794CC8FD18EF29610077ACBC /* colour.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = colour.fsh; sourceTree = "<group>"; };
+		794CC8FE18EF29610077ACBC /* colour2D.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = colour2D.vsh; sourceTree = "<group>"; };
+		794CC8FF18EF29610077ACBC /* colour3D.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = colour3D.vsh; sourceTree = "<group>"; };
+		794CC90018EF29610077ACBC /* colourUV.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = colourUV.fsh; sourceTree = "<group>"; };
+		794CC90118EF29610077ACBC /* colourUV2D.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = colourUV2D.vsh; sourceTree = "<group>"; };
+		794CC90218EF29610077ACBC /* colourUV3D.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = colourUV3D.vsh; sourceTree = "<group>"; };
+		794CC90318EF29610077ACBC /* colourUVAlpha.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = colourUVAlpha.fsh; sourceTree = "<group>"; };
+		794CC90418EF29610077ACBC /* debugDrawText2D.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = debugDrawText2D.fsh; sourceTree = "<group>"; };
+		794CC90518EF29610077ACBC /* diffuseNMap.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = diffuseNMap.fsh; sourceTree = "<group>"; };
+		794CC90618EF29610077ACBC /* greyUV.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = greyUV.fsh; sourceTree = "<group>"; };
+		794CC90718EF29610077ACBC /* materials.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = materials.json; sourceTree = "<group>"; };
+		794CC90818EF29610077ACBC /* prefix.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = prefix.sh; sourceTree = "<group>"; };
+		794CC90A18EF29610077ACBC /* blur.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = blur.fsh; sourceTree = "<group>"; };
+		794CC90B18EF29610077ACBC /* deform.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = deform.fsh; sourceTree = "<group>"; };
+		794CC90C18EF29610077ACBC /* flower.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = flower.fsh; sourceTree = "<group>"; };
+		794CC90D18EF29610077ACBC /* heart.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = heart.fsh; sourceTree = "<group>"; };
+		794CC90E18EF29610077ACBC /* julia.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = julia.fsh; sourceTree = "<group>"; };
+		794CC90F18EF29610077ACBC /* mandelbrot.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = mandelbrot.fsh; sourceTree = "<group>"; };
+		794CC91018EF29610077ACBC /* plasma.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = plasma.fsh; sourceTree = "<group>"; };
+		794CC91118EF29610077ACBC /* pquad.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = pquad.vsh; sourceTree = "<group>"; };
+		794CC91218EF29610077ACBC /* ShaderTest0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShaderTest0.png; sourceTree = "<group>"; };
+		794CC91318EF29610077ACBC /* ShaderTest1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShaderTest1.png; sourceTree = "<group>"; };
+		794CC91418EF29610077ACBC /* ShaderTest2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShaderTest2.png; sourceTree = "<group>"; };
+		794CC91518EF29610077ACBC /* ShaderTest5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShaderTest5.png; sourceTree = "<group>"; };
+		794CC91618EF29610077ACBC /* sun.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = sun.fsh; sourceTree = "<group>"; };
+		794CC91718EF29610077ACBC /* twist.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = twist.fsh; sourceTree = "<group>"; };
+		794CC91818EF29610077ACBC /* UV3D.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = UV3D.vsh; sourceTree = "<group>"; };
+		794CC91A18EF29610077ACBC /* blip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blip.wav; sourceTree = "<group>"; };
+		794CC91B18EF29610077ACBC /* explode.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explode.wav; sourceTree = "<group>"; };
+		794CC91C18EF29610077ACBC /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
+		794CC91D18EF29610077ACBC /* pickup.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pickup.wav; sourceTree = "<group>"; };
+		794CC91E18EF29610077ACBC /* powerup.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = powerup.wav; sourceTree = "<group>"; };
+		794CC91F18EF29610077ACBC /* sounds.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sounds.json; sourceTree = "<group>"; };
+		794CC92018EF29610077ACBC /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
+		794CC92118EF29610077ACBC /* testEffects.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = testEffects.json; sourceTree = "<group>"; };
+		794CC92318EF29610077ACBC /* airlock-door.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "airlock-door.wav"; sourceTree = "<group>"; };
+		794CC92418EF29610077ACBC /* bubble.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = bubble.aif; sourceTree = "<group>"; };
+		794CC92518EF29610077ACBC /* Kong 1.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kong 1.aif"; sourceTree = "<group>"; };
+		794CC92618EF29610077ACBC /* Thor 1.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Thor 1.aif"; sourceTree = "<group>"; };
+		794CC92718EF29610077ACBC /* Thor 2.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Thor 2.aif"; sourceTree = "<group>"; };
+		794CC92818EF29610077ACBC /* Thor 3.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Thor 3.aif"; sourceTree = "<group>"; };
+		79C0A02C16B91FF700B83139 /* CL.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CL.xcconfig; sourceTree = "<group>"; };
+		79C0A02D16B91FF700B83139 /* CLConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLConfig.h; sourceTree = "<group>"; };
+		79C0A02F16B91FF700B83139 /* Debug-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug-iOS.xcconfig"; sourceTree = "<group>"; };
+		79C0A03016B91FF700B83139 /* Debug-OSX.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug-OSX.xcconfig"; sourceTree = "<group>"; };
+		79C0A03316B91FF700B83139 /* Release-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release-iOS.xcconfig"; sourceTree = "<group>"; };
+		79C0A03416B91FF700B83139 /* Release-OSX.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release-OSX.xcconfig"; sourceTree = "<group>"; };
+		79C0A03516B91FF700B83139 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		79C0A03616B91FF700B83139 /* Develop.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Develop.xcconfig; sourceTree = "<group>"; };
+		79C0A03816B91FF700B83139 /* GLConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLConfig.h; sourceTree = "<group>"; };
+		79C0A03916B91FF700B83139 /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iOS.xcconfig; sourceTree = "<group>"; };
+		79C0A03A16B91FF700B83139 /* OSX.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = OSX.xcconfig; sourceTree = "<group>"; };
+		79C0A03B16B91FF700B83139 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		79C0A03C16B91FF700B83139 /* VLConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VLConfig.h; sourceTree = "<group>"; };
+		79C0A03D16B91FF700B83139 /* XcodeSettings.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = XcodeSettings.txt; sourceTree = "<group>"; };
+		79C0A06316B922D400B83139 /* Sound_iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Sound_iOS.plist; sourceTree = "<group>"; };
+		79C0A06416B922D500B83139 /* Sound_OSX.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Sound_OSX.plist; sourceTree = "<group>"; };
+		79C0A08216B9237800B83139 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		79C0A08316B9237800B83139 /* MainWindow-iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainWindow-iPhone.xib"; sourceTree = "<group>"; };
+		79C0A08516B9237800B83139 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		79C0A08616B9237800B83139 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		79C0A0AC16B927CA00B83139 /* SoundApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundApp.cpp; sourceTree = "<group>"; };
+		79C0A0AE16B9283D00B83139 /* SoundApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundApp.h; sourceTree = "<group>"; };
+		79C0A0D316B92E6200B83139 /* Sound_OSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sound_OSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7938424F175767AC0061D76D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79FDF35318C772890006B6A1 /* libHalcyon_iOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79C0A0D016B92E6200B83139 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79FDF35618C772940006B6A1 /* libHalcyon_OSX.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7923F49C18ECA70E00CDDCDF /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+				7923F49D18ECA70E00CDDCDF /* Halcyon.iconset */,
+				7923F49E18ECA70E00CDDCDF /* InfoPlist.strings */,
+				7923F49F18ECA70E00CDDCDF /* MainMenu.xib */,
+			);
+			name = OSX;
+			sourceTree = "<group>";
+		};
+		794CC8F718EF29610077ACBC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				794CC8F818EF29610077ACBC /* config.json */,
+				794CC8F918EF29610077ACBC /* Shared */,
+				794CC92218EF29610077ACBC /* sounds */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		794CC8F918EF29610077ACBC /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				794CC8FA18EF29610077ACBC /* config.json */,
+				794CC8FB18EF29610077ACBC /* log.json */,
+				794CC8FC18EF29610077ACBC /* Materials */,
+				794CC91918EF29610077ACBC /* Sounds */,
+				794CC92118EF29610077ACBC /* testEffects.json */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		794CC8FC18EF29610077ACBC /* Materials */ = {
+			isa = PBXGroup;
+			children = (
+				794CC8FD18EF29610077ACBC /* colour.fsh */,
+				794CC8FE18EF29610077ACBC /* colour2D.vsh */,
+				794CC8FF18EF29610077ACBC /* colour3D.vsh */,
+				794CC90018EF29610077ACBC /* colourUV.fsh */,
+				794CC90118EF29610077ACBC /* colourUV2D.vsh */,
+				794CC90218EF29610077ACBC /* colourUV3D.vsh */,
+				794CC90318EF29610077ACBC /* colourUVAlpha.fsh */,
+				794CC90418EF29610077ACBC /* debugDrawText2D.fsh */,
+				794CC90518EF29610077ACBC /* diffuseNMap.fsh */,
+				794CC90618EF29610077ACBC /* greyUV.fsh */,
+				794CC90718EF29610077ACBC /* materials.json */,
+				794CC90818EF29610077ACBC /* prefix.sh */,
+				794CC90918EF29610077ACBC /* Test */,
+				794CC91818EF29610077ACBC /* UV3D.vsh */,
+			);
+			path = Materials;
+			sourceTree = "<group>";
+		};
+		794CC90918EF29610077ACBC /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				794CC90A18EF29610077ACBC /* blur.fsh */,
+				794CC90B18EF29610077ACBC /* deform.fsh */,
+				794CC90C18EF29610077ACBC /* flower.fsh */,
+				794CC90D18EF29610077ACBC /* heart.fsh */,
+				794CC90E18EF29610077ACBC /* julia.fsh */,
+				794CC90F18EF29610077ACBC /* mandelbrot.fsh */,
+				794CC91018EF29610077ACBC /* plasma.fsh */,
+				794CC91118EF29610077ACBC /* pquad.vsh */,
+				794CC91218EF29610077ACBC /* ShaderTest0.png */,
+				794CC91318EF29610077ACBC /* ShaderTest1.png */,
+				794CC91418EF29610077ACBC /* ShaderTest2.png */,
+				794CC91518EF29610077ACBC /* ShaderTest5.png */,
+				794CC91618EF29610077ACBC /* sun.fsh */,
+				794CC91718EF29610077ACBC /* twist.fsh */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		794CC91918EF29610077ACBC /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				794CC91A18EF29610077ACBC /* blip.wav */,
+				794CC91B18EF29610077ACBC /* explode.wav */,
+				794CC91C18EF29610077ACBC /* hit.wav */,
+				794CC91D18EF29610077ACBC /* pickup.wav */,
+				794CC91E18EF29610077ACBC /* powerup.wav */,
+				794CC91F18EF29610077ACBC /* sounds.json */,
+				794CC92018EF29610077ACBC /* win.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		794CC92218EF29610077ACBC /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				794CC92318EF29610077ACBC /* airlock-door.wav */,
+				794CC92418EF29610077ACBC /* bubble.aif */,
+				794CC92518EF29610077ACBC /* Kong 1.aif */,
+				794CC92618EF29610077ACBC /* Thor 1.aif */,
+				794CC92718EF29610077ACBC /* Thor 2.aif */,
+				794CC92818EF29610077ACBC /* Thor 3.aif */,
+			);
+			path = sounds;
+			sourceTree = "<group>";
+		};
+		79AAFC3718C0F51100C88D54 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				79AAFC4518C0F51100C88D54 /* libHalcyon_iOS.a */,
+				79AAFC4718C0F51100C88D54 /* libHalcyon_OSX.a */,
+				79AAFC4918C0F51100C88D54 /* EventBroadcaster.app */,
+				7923F49B18ECA70400CDDCDF /* cooker */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		79C09FEE16B91D4800B83139 = {
+			isa = PBXGroup;
+			children = (
+				79C0A0AE16B9283D00B83139 /* SoundApp.h */,
+				79C0A0AC16B927CA00B83139 /* SoundApp.cpp */,
+				79C0A06316B922D400B83139 /* Sound_iOS.plist */,
+				79C0A06416B922D500B83139 /* Sound_OSX.plist */,
+				79C0A02A16B91FF700B83139 /* Config */,
+				794CC8F718EF29610077ACBC /* Data */,
+				79C0A08016B9237800B83139 /* Resources */,
+				79C0A04516B920BD00B83139 /* Products */,
+				790BFB5D1726B88C0045E9A8 /* Halcyon.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		79C0A02A16B91FF700B83139 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				79C0A02D16B91FF700B83139 /* CLConfig.h */,
+				79C0A03C16B91FF700B83139 /* VLConfig.h */,
+				79C0A03816B91FF700B83139 /* GLConfig.h */,
+				79C0A02E16B91FF700B83139 /* Combos */,
+				79C0A02C16B91FF700B83139 /* CL.xcconfig */,
+				79C0A03516B91FF700B83139 /* Debug.xcconfig */,
+				79C0A03616B91FF700B83139 /* Develop.xcconfig */,
+				79C0A03916B91FF700B83139 /* iOS.xcconfig */,
+				79C0A03A16B91FF700B83139 /* OSX.xcconfig */,
+				79C0A03B16B91FF700B83139 /* Release.xcconfig */,
+				79C0A03D16B91FF700B83139 /* XcodeSettings.txt */,
+			);
+			name = Config;
+			path = ../../Config;
+			sourceTree = "<group>";
+		};
+		79C0A02E16B91FF700B83139 /* Combos */ = {
+			isa = PBXGroup;
+			children = (
+				7938427117576A8C0061D76D /* Develop-iOS.xcconfig */,
+				7938427217576A8C0061D76D /* Develop-OSX.xcconfig */,
+				79C0A02F16B91FF700B83139 /* Debug-iOS.xcconfig */,
+				79C0A03016B91FF700B83139 /* Debug-OSX.xcconfig */,
+				79C0A03316B91FF700B83139 /* Release-iOS.xcconfig */,
+				79C0A03416B91FF700B83139 /* Release-OSX.xcconfig */,
+			);
+			path = Combos;
+			sourceTree = "<group>";
+		};
+		79C0A04516B920BD00B83139 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				79C0A0D316B92E6200B83139 /* Sound_OSX.app */,
+				79384260175767AC0061D76D /* Sound_iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		79C0A08016B9237800B83139 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				79FDF35718C774D40006B6A1 /* Shell */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		79C0A08116B9237800B83139 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				7923F48618ECA70000CDDCDF /* back_icon.png */,
+				7923F48718ECA70000CDDCDF /* back_icon@2x.png */,
+				7923F48818ECA70000CDDCDF /* forward_icon.png */,
+				7923F48918ECA70000CDDCDF /* forward_icon@2x.png */,
+				7923F48A18ECA70000CDDCDF /* HalcyonLaunch-Landscape~ipad.png */,
+				7923F48B18ECA70000CDDCDF /* HalcyonLaunch-Portrait~ipad.png */,
+				7923F48C18ECA70000CDDCDF /* HalcyonLaunch.png */,
+				7923F48D18ECA70000CDDCDF /* icon.png */,
+				7923F48E18ECA70000CDDCDF /* icon@2x.png */,
+				79C0A08216B9237800B83139 /* MainWindow-iPad.xib */,
+				79C0A08316B9237800B83139 /* MainWindow-iPhone.xib */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		79C0A08416B9237800B83139 /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+				7923F49C18ECA70E00CDDCDF /* OSX */,
+				79C0A08516B9237800B83139 /* InfoPlist.strings */,
+				79C0A08616B9237800B83139 /* MainMenu.xib */,
+			);
+			path = OSX;
+			sourceTree = "<group>";
+		};
+		79FDF35718C774D40006B6A1 /* Shell */ = {
+			isa = PBXGroup;
+			children = (
+				79C0A08116B9237800B83139 /* iOS */,
+				79C0A08416B9237800B83139 /* OSX */,
+			);
+			name = Shell;
+			path = ../../Shared/HL/Shell/Resources;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		79384248175767AC0061D76D /* Sound_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79384259175767AC0061D76D /* Build configuration list for PBXNativeTarget "Sound_iOS" */;
+			buildPhases = (
+				79384255175767AC0061D76D /* Resources */,
+				7938424B175767AC0061D76D /* Sources */,
+				7938424F175767AC0061D76D /* Frameworks */,
+				79384258175767AC0061D76D /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				79FDF34F18C772830006B6A1 /* PBXTargetDependency */,
+			);
+			name = Sound_iOS;
+			productName = Demo;
+			productReference = 79384260175767AC0061D76D /* Sound_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		79C0A0D216B92E6200B83139 /* Sound_OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79C0A0EE16B92E6200B83139 /* Build configuration list for PBXNativeTarget "Sound_OSX" */;
+			buildPhases = (
+				79C0A0CF16B92E6200B83139 /* Sources */,
+				79C0A0D016B92E6200B83139 /* Frameworks */,
+				79C0A0D116B92E6200B83139 /* Resources */,
+				79612D9D17542E5000CEF329 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				79FDF35518C7728F0006B6A1 /* PBXTargetDependency */,
+			);
+			name = Sound_OSX;
+			productName = Demo;
+			productReference = 79C0A0D316B92E6200B83139 /* Sound_OSX.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		79C09FF016B91D4800B83139 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+			};
+			buildConfigurationList = 79C09FF316B91D4800B83139 /* Build configuration list for PBXProject "SoundProto" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 79C09FEE16B91D4800B83139;
+			productRefGroup = 79C0A04516B920BD00B83139 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 79AAFC3718C0F51100C88D54 /* Products */;
+					ProjectRef = 790BFB5D1726B88C0045E9A8 /* Halcyon.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				79384248175767AC0061D76D /* Sound_iOS */,
+				79C0A0D216B92E6200B83139 /* Sound_OSX */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7923F49B18ECA70400CDDCDF /* cooker */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = cooker;
+			remoteRef = 7923F49A18ECA70400CDDCDF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		79AAFC4518C0F51100C88D54 /* libHalcyon_iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libHalcyon_iOS.a;
+			remoteRef = 79AAFC4418C0F51100C88D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		79AAFC4718C0F51100C88D54 /* libHalcyon_OSX.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libHalcyon_OSX.a;
+			remoteRef = 79AAFC4618C0F51100C88D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		79AAFC4918C0F51100C88D54 /* EventBroadcaster.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = EventBroadcaster.app;
+			remoteRef = 79AAFC4818C0F51100C88D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		79384255175767AC0061D76D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				793842641757682E0061D76D /* MainWindow-iPad.xib in Resources */,
+				7923F49518ECA70000CDDCDF /* HalcyonLaunch.png in Resources */,
+				7923F49418ECA70000CDDCDF /* HalcyonLaunch-Portrait~ipad.png in Resources */,
+				793842651757682E0061D76D /* MainWindow-iPhone.xib in Resources */,
+				7923F49318ECA70000CDDCDF /* HalcyonLaunch-Landscape~ipad.png in Resources */,
+				7923F49118ECA70000CDDCDF /* forward_icon.png in Resources */,
+				7923F49618ECA70000CDDCDF /* icon.png in Resources */,
+				7923F49018ECA70000CDDCDF /* back_icon@2x.png in Resources */,
+				7923F48F18ECA70000CDDCDF /* back_icon.png in Resources */,
+				7923F49218ECA70000CDDCDF /* forward_icon@2x.png in Resources */,
+				7923F49718ECA70000CDDCDF /* icon@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79C0A0D116B92E6200B83139 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7923F4A018ECA70E00CDDCDF /* Halcyon.iconset in Resources */,
+				7923F4A218ECA70E00CDDCDF /* MainMenu.xib in Resources */,
+				7923F4A118ECA70E00CDDCDF /* InfoPlist.strings in Resources */,
+				79C0A0F516B92EE500B83139 /* InfoPlist.strings in Resources */,
+				79C0A0F616B92EE500B83139 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		79384258175767AC0061D76D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "../../Scripts/xcode-update-resources.sh";
+		};
+		79612D9D17542E5000CEF329 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "../../Scripts/xcode-update-resources.sh";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7938424B175767AC0061D76D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7938424C175767AC0061D76D /* SoundApp.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79C0A0CF16B92E6200B83139 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79C0A0F716B92F5B00B83139 /* SoundApp.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		79FDF34F18C772830006B6A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Halcyon_iOS;
+			targetProxy = 79FDF34E18C772830006B6A1 /* PBXContainerItemProxy */;
+		};
+		79FDF35518C7728F0006B6A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Halcyon_OSX;
+			targetProxy = 79FDF35418C7728F0006B6A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		7938425A175767AC0061D76D /* Debug-iOS */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "$(HL_APP_LINK_IOS)";
+			};
+			name = "Debug-iOS";
+		};
+		7938425B175767AC0061D76D /* Debug-OSX */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "$(HL_APP_LINK_IOS)";
+			};
+			name = "Debug-OSX";
+		};
+		7938425C175767AC0061D76D /* Develop-iOS */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "$(HL_APP_LINK_IOS)";
+			};
+			name = "Develop-iOS";
+		};
+		7938425D175767AC0061D76D /* Develop-OSX */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "$(HL_APP_LINK_IOS)";
+			};
+			name = "Develop-OSX";
+		};
+		7938425E175767AC0061D76D /* Release-iOS */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "$(HL_APP_LINK_IOS)";
+			};
+			name = "Release-iOS";
+		};
+		7938425F175767AC0061D76D /* Release-OSX */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "$(HL_APP_LINK_IOS)";
+			};
+			name = "Release-OSX";
+		};
+		79C09FF516B91D4800B83139 /* Debug-iOS */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79C0A02F16B91FF700B83139 /* Debug-iOS.xcconfig */;
+			buildSettings = {
+			};
+			name = "Debug-iOS";
+		};
+		79C09FFA16B91D7500B83139 /* Develop-iOS */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7938427117576A8C0061D76D /* Develop-iOS.xcconfig */;
+			buildSettings = {
+			};
+			name = "Develop-iOS";
+		};
+		79C09FFC16B91DB500B83139 /* Release-iOS */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79C0A03316B91FF700B83139 /* Release-iOS.xcconfig */;
+			buildSettings = {
+			};
+			name = "Release-iOS";
+		};
+		79C09FFD16B91DDB00B83139 /* Debug-OSX */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79C0A03016B91FF700B83139 /* Debug-OSX.xcconfig */;
+			buildSettings = {
+			};
+			name = "Debug-OSX";
+		};
+		79C09FFE16B91DE800B83139 /* Develop-OSX */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7938427217576A8C0061D76D /* Develop-OSX.xcconfig */;
+			buildSettings = {
+			};
+			name = "Develop-OSX";
+		};
+		79C09FFF16B91DF100B83139 /* Release-OSX */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79C0A03416B91FF700B83139 /* Release-OSX.xcconfig */;
+			buildSettings = {
+			};
+			name = "Release-OSX";
+		};
+		79C0A0EF16B92E6200B83139 /* Debug-iOS */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "$(HL_APP_LINK_OSX)";
+			};
+			name = "Debug-iOS";
+		};
+		79C0A0F016B92E6200B83139 /* Debug-OSX */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "$(HL_APP_LINK_OSX)";
+			};
+			name = "Debug-OSX";
+		};
+		79C0A0F116B92E6200B83139 /* Develop-iOS */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "$(HL_APP_LINK_OSX)";
+			};
+			name = "Develop-iOS";
+		};
+		79C0A0F216B92E6200B83139 /* Develop-OSX */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "$(HL_APP_LINK_OSX)";
+			};
+			name = "Develop-OSX";
+		};
+		79C0A0F316B92E6200B83139 /* Release-iOS */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "$(HL_APP_LINK_OSX)";
+			};
+			name = "Release-iOS";
+		};
+		79C0A0F416B92E6200B83139 /* Release-OSX */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "$(HL_APP_LINK_OSX)";
+			};
+			name = "Release-OSX";
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		79384259175767AC0061D76D /* Build configuration list for PBXNativeTarget "Sound_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7938425A175767AC0061D76D /* Debug-iOS */,
+				7938425B175767AC0061D76D /* Debug-OSX */,
+				7938425C175767AC0061D76D /* Develop-iOS */,
+				7938425D175767AC0061D76D /* Develop-OSX */,
+				7938425E175767AC0061D76D /* Release-iOS */,
+				7938425F175767AC0061D76D /* Release-OSX */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug-OSX";
+		};
+		79C09FF316B91D4800B83139 /* Build configuration list for PBXProject "SoundProto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79C09FF516B91D4800B83139 /* Debug-iOS */,
+				79C09FFD16B91DDB00B83139 /* Debug-OSX */,
+				79C09FFA16B91D7500B83139 /* Develop-iOS */,
+				79C09FFE16B91DE800B83139 /* Develop-OSX */,
+				79C09FFC16B91DB500B83139 /* Release-iOS */,
+				79C09FFF16B91DF100B83139 /* Release-OSX */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug-OSX";
+		};
+		79C0A0EE16B92E6200B83139 /* Build configuration list for PBXNativeTarget "Sound_OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79C0A0EF16B92E6200B83139 /* Debug-iOS */,
+				79C0A0F016B92E6200B83139 /* Debug-OSX */,
+				79C0A0F116B92E6200B83139 /* Develop-iOS */,
+				79C0A0F216B92E6200B83139 /* Develop-OSX */,
+				79C0A0F316B92E6200B83139 /* Release-iOS */,
+				79C0A0F416B92E6200B83139 /* Release-OSX */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug-OSX";
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 79C09FF016B91D4800B83139 /* Project object */;
+}

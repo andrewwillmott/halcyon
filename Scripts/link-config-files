@@ -1,0 +1,31 @@
+#!/bin/sh
+
+BASE="$(dirname $0)"
+echo "BASE = $BASE"
+
+mkdir -p $HOME/bin
+ln -sf ${BASE}/../Bin/p4 $HOME/bin
+
+mkdir -p $HOME/Library/Developer/Xcode/UserData/KeyBindings
+ln -sf ${BASE}/Xcode/Project.idekeybindings $HOME/Library/Developer/Xcode/UserData/KeyBindings
+
+mkdir -p $HOME/Library/Developer/Xcode/Templates/File\ Templates
+ln -sf ${BASE}/Xcode/FileTemplates $HOME/Library/Developer/Xcode/Templates/File\ Templates/Radiator
+
+ln -sf ${BASE}/Xcode/lldb-config $HOME/.lldbinit
+ln -sf ${BASE}/Xcode/lldb $HOME/lldb
+
+mkdir -p  $HOME/Library/Application\ Support/TextWrangler/Language\ Modules
+ln -sf ${BASE}/TextWrangler/jellygrade.plist $HOME/Library/Application\ Support/TextWrangler/Language\ Modules
+
+mkdir -p $HOME/Library/Application\ Support/TextWrangler/Scripts
+for i in ${BASE}/TextWrangler/Scripts/* ; do
+    ln -sf $i $HOME/Library/Application\ Support/TextWrangler/Scripts/`basename $i`
+done
+
+mkdir -p $HOME/Library/Application\ Support/TextWrangler/Text\ Filters
+for i in ${BASE}/TextWrangler/Text\ Filters/* ; do
+    ln -sf "$i" $HOME/Library/Application\ Support/TextWrangler/Text\ Filters/`basename "$i"`
+done
+
+#read
