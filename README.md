@@ -1,7 +1,7 @@
 Halycon
 =======
 
-Mobile game engine mostly written in 2014. Supports iOS and OSX.
+Mobile game engine mostly written in 2013. Supports iOS and OSX.
 
 Open Halcyon.xcworkspace at the top level, and select one of the following
 schemes, then build and run:
